@@ -7,14 +7,53 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500062161C4640C8007AC3B6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 500062141C4640C8007AC3B6 /* AppDelegate.m */; };
+		50035A131C8679CC00FF6BF3 /* THClassNameListTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 50035A121C8679CC00FF6BF3 /* THClassNameListTool.m */; };
+		50035A181C868CD500FF6BF3 /* THSetStaticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50035A161C868CD500FF6BF3 /* THSetStaticViewController.m */; };
+		50035A201C86CD1F00FF6BF3 /* THSetNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50035A1F1C86CD1F00FF6BF3 /* THSetNoticeViewController.m */; };
+		50035A231C86CD5500FF6BF3 /* THNoticeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50035A221C86CD5500FF6BF3 /* THNoticeDetailViewController.m */; };
+		50080CCF1CA2859100E0D324 /* THStudentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50080CCE1CA2859100E0D324 /* THStudentCollectionViewCell.m */; };
+		50080CD21CA2914000E0D324 /* IconText.m in Sources */ = {isa = PBXBuildFile; fileRef = 50080CD11CA2914000E0D324 /* IconText.m */; };
 		500FDD4C1C3F9E740069F2AE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 500FDD4B1C3F9E740069F2AE /* main.m */; };
-		500FDD4F1C3F9E740069F2AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 500FDD4E1C3F9E740069F2AE /* AppDelegate.m */; };
-		500FDD521C3F9E740069F2AE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 500FDD511C3F9E740069F2AE /* ViewController.m */; };
-		500FDD551C3F9E740069F2AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 500FDD531C3F9E740069F2AE /* Main.storyboard */; };
-		500FDD571C3F9E740069F2AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 500FDD561C3F9E740069F2AE /* Assets.xcassets */; };
 		500FDD5A1C3F9E740069F2AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 500FDD581C3F9E740069F2AE /* LaunchScreen.storyboard */; };
 		500FDD651C3F9E750069F2AE /* TH_2_0Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 500FDD641C3F9E750069F2AE /* TH_2_0Tests.m */; };
 		500FDD701C3F9E750069F2AE /* TH_2_0UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 500FDD6F1C3F9E750069F2AE /* TH_2_0UITests.m */; };
+		5012313A1C83D22000F4CC6B /* THOrderNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 501231391C83D22000F4CC6B /* THOrderNameViewController.m */; };
+		5012313E1C83D24900F4CC6B /* THNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5012313D1C83D24900F4CC6B /* THNextViewController.m */; };
+		501231451C83EA1A00F4CC6B /* THDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 501231411C83EA1A00F4CC6B /* THDetailViewController.m */; };
+		501231461C83EA1A00F4CC6B /* THdetailStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 501231441C83EA1A00F4CC6B /* THdetailStudent.m */; };
+		5029EAC61C94FFB700291FF9 /* THSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5029EAC51C94FFB700291FF9 /* THSettingTableViewController.m */; };
+		5029EACC1C951FA000291FF9 /* THAbsenceMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5029EACB1C951FA000291FF9 /* THAbsenceMessage.m */; };
+		503990DB1CA3CA5200D45F2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 503990DA1CA3CA5200D45F2A /* Assets.xcassets */; };
+		503990DF1CA40F1100D45F2A /* THPresentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 503990DE1CA40F1100D45F2A /* THPresentTableViewController.m */; };
+		503B96741CA0D5FC00DA3491 /* THNamelistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 503B96731CA0D5FC00DA3491 /* THNamelistViewController.m */; };
+		50400C6A1C85374D00372175 /* THStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50400C691C85374D00372175 /* THStatisticsViewController.m */; };
+		50400C6F1C858FBF00372175 /* THHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50400C6E1C858FBF00372175 /* THHistoryViewController.m */; };
+		508E40431C92F6D500DE5D98 /* THMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 508E40421C92F6D500DE5D98 /* THMessage.m */; };
+		5095A0AC1C954CD800666641 /* THRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 5095A0AB1C954CD800666641 /* THRecord.m */; };
+		5095A0AF1C95675500666641 /* THMessageText.m in Sources */ = {isa = PBXBuildFile; fileRef = 5095A0AE1C95675500666641 /* THMessageText.m */; };
+		5095A0B81C95851700666641 /* THNoticeCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5095A0B71C95851700666641 /* THNoticeCellTableViewCell.m */; };
+		5098C37A1C81B45400305CC9 /* THClassTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5098C3791C81B45400305CC9 /* THClassTableViewCell.m */; };
+		50AF8F0F1C96E67200242482 /* THscores.m in Sources */ = {isa = PBXBuildFile; fileRef = 50AF8F0C1C96E67200242482 /* THscores.m */; };
+		50AF8F101C96E67200242482 /* THHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50AF8F0E1C96E67200242482 /* THHomeworkViewController.m */; };
+		50B60FE01C93CB4500FBD892 /* libUMessage_Sdk_1.2.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50B60FDE1C93CB4500FBD892 /* libUMessage_Sdk_1.2.6.a */; };
+		50B949AF1C4680DC0012F4DA /* THTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B949AE1C4680DC0012F4DA /* THTabBarViewController.m */; };
+		50C89D541C9AE1E6009D1836 /* THFDYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C89D531C9AE1E6009D1836 /* THFDYViewController.m */; };
+		50D5B5341C828CDA00A5C4C7 /* THStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D5B5311C828CDA00A5C4C7 /* THStudent.m */; };
+		50D5B53D1C82C42C00A5C4C7 /* THStudentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D5B53C1C82C42C00A5C4C7 /* THStudentTableViewCell.m */; };
+		50D5B5441C83166B00A5C4C7 /* THRepairViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D5B5431C83166B00A5C4C7 /* THRepairViewController.m */; };
+		50DE4D511C7ED19200AD006C /* THLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50DE4D501C7ED19200AD006C /* THLoginViewController.m */; };
+		50DE4D541C7EDFFE00AD006C /* MBProgressHUD+YXX.m in Sources */ = {isa = PBXBuildFile; fileRef = 50DE4D531C7EDFFE00AD006C /* MBProgressHUD+YXX.m */; };
+		50DE4D811C7EE32900AD006C /* THSettingGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 50DE4D731C7EE32900AD006C /* THSettingGroup.m */; };
+		50DE4D821C7EE32900AD006C /* THSettingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 50DE4D751C7EE32900AD006C /* THSettingItem.m */; };
+		50DE4D851C7EE32900AD006C /* THSetSubAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50DE4D7E1C7EE32900AD006C /* THSetSubAccountViewController.m */; };
+		50DE4D8A1C7EE3E600AD006C /* THClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 50DE4D891C7EE3E600AD006C /* THClass.m */; };
+		50DE4D8E1C7EE4B200AD006C /* THMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50DE4D8D1C7EE4B200AD006C /* THMainViewController.m */; };
+		50E1B2921C8A76D50060C52C /* UITextfield+UIPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E1B2911C8A76D50060C52C /* UITextfield+UIPickView.m */; };
+		50E1B2951C8A771B0060C52C /* YuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E1B2941C8A771B0060C52C /* YuButton.m */; };
+		50E1B2991C8A861E0060C52C /* THDetailHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E1B2981C8A861E0060C52C /* THDetailHistoryViewController.m */; };
+		50F1F23F1C8018D100282F33 /* THTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F1F23E1C8018D100282F33 /* THTopView.m */; };
+		E3191C50CF786635F43FF0B1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F43BA8A5A2B0E84AE104B9C7 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,14 +74,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E4D13A0AE095A59FD433964 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		500062131C4640C8007AC3B6 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		500062141C4640C8007AC3B6 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		500062151C4640C8007AC3B6 /* THPch.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THPch.pch; sourceTree = "<group>"; };
+		50035A111C8679CC00FF6BF3 /* THClassNameListTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THClassNameListTool.h; sourceTree = "<group>"; };
+		50035A121C8679CC00FF6BF3 /* THClassNameListTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THClassNameListTool.m; sourceTree = "<group>"; };
+		50035A151C868CD500FF6BF3 /* THSetStaticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSetStaticViewController.h; sourceTree = "<group>"; };
+		50035A161C868CD500FF6BF3 /* THSetStaticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSetStaticViewController.m; sourceTree = "<group>"; };
+		50035A1E1C86CD1F00FF6BF3 /* THSetNoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSetNoticeViewController.h; sourceTree = "<group>"; };
+		50035A1F1C86CD1F00FF6BF3 /* THSetNoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSetNoticeViewController.m; sourceTree = "<group>"; };
+		50035A211C86CD5500FF6BF3 /* THNoticeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNoticeDetailViewController.h; sourceTree = "<group>"; };
+		50035A221C86CD5500FF6BF3 /* THNoticeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNoticeDetailViewController.m; sourceTree = "<group>"; };
+		50080CCD1CA2859100E0D324 /* THStudentCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THStudentCollectionViewCell.h; sourceTree = "<group>"; };
+		50080CCE1CA2859100E0D324 /* THStudentCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THStudentCollectionViewCell.m; sourceTree = "<group>"; };
+		50080CD01CA2914000E0D324 /* IconText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconText.h; sourceTree = "<group>"; };
+		50080CD11CA2914000E0D324 /* IconText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconText.m; sourceTree = "<group>"; };
 		500FDD471C3F9E740069F2AE /* TH-2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TH-2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		500FDD4B1C3F9E740069F2AE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		500FDD4D1C3F9E740069F2AE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		500FDD4E1C3F9E740069F2AE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		500FDD501C3F9E740069F2AE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		500FDD511C3F9E740069F2AE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		500FDD541C3F9E740069F2AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		500FDD561C3F9E740069F2AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		500FDD591C3F9E740069F2AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		500FDD5B1C3F9E740069F2AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		500FDD601C3F9E750069F2AE /* TH-2.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TH-2.0Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +100,77 @@
 		500FDD6B1C3F9E750069F2AE /* TH-2.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TH-2.0UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		500FDD6F1C3F9E750069F2AE /* TH_2_0UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TH_2_0UITests.m; sourceTree = "<group>"; };
 		500FDD711C3F9E750069F2AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		501231381C83D22000F4CC6B /* THOrderNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THOrderNameViewController.h; sourceTree = "<group>"; };
+		501231391C83D22000F4CC6B /* THOrderNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THOrderNameViewController.m; sourceTree = "<group>"; };
+		5012313C1C83D24900F4CC6B /* THNextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNextViewController.h; sourceTree = "<group>"; };
+		5012313D1C83D24900F4CC6B /* THNextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNextViewController.m; sourceTree = "<group>"; };
+		501231401C83EA1A00F4CC6B /* THDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THDetailViewController.h; sourceTree = "<group>"; };
+		501231411C83EA1A00F4CC6B /* THDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THDetailViewController.m; sourceTree = "<group>"; };
+		501231431C83EA1A00F4CC6B /* THdetailStudent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THdetailStudent.h; sourceTree = "<group>"; };
+		501231441C83EA1A00F4CC6B /* THdetailStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THdetailStudent.m; sourceTree = "<group>"; };
+		5029EAC41C94FFB700291FF9 /* THSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSettingTableViewController.h; sourceTree = "<group>"; };
+		5029EAC51C94FFB700291FF9 /* THSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSettingTableViewController.m; sourceTree = "<group>"; };
+		5029EACA1C951FA000291FF9 /* THAbsenceMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THAbsenceMessage.h; sourceTree = "<group>"; };
+		5029EACB1C951FA000291FF9 /* THAbsenceMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THAbsenceMessage.m; sourceTree = "<group>"; };
+		503990DA1CA3CA5200D45F2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		503990DD1CA40F1100D45F2A /* THPresentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THPresentTableViewController.h; sourceTree = "<group>"; };
+		503990DE1CA40F1100D45F2A /* THPresentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THPresentTableViewController.m; sourceTree = "<group>"; };
+		503B96721CA0D5FC00DA3491 /* THNamelistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNamelistViewController.h; sourceTree = "<group>"; };
+		503B96731CA0D5FC00DA3491 /* THNamelistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNamelistViewController.m; sourceTree = "<group>"; };
+		50400C681C85374D00372175 /* THStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THStatisticsViewController.h; sourceTree = "<group>"; };
+		50400C691C85374D00372175 /* THStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THStatisticsViewController.m; sourceTree = "<group>"; };
+		50400C6D1C858FBF00372175 /* THHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THHistoryViewController.h; sourceTree = "<group>"; };
+		50400C6E1C858FBF00372175 /* THHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THHistoryViewController.m; sourceTree = "<group>"; };
+		508E40411C92F6D500DE5D98 /* THMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THMessage.h; sourceTree = "<group>"; };
+		508E40421C92F6D500DE5D98 /* THMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THMessage.m; sourceTree = "<group>"; };
+		5095A0AA1C954CD800666641 /* THRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THRecord.h; sourceTree = "<group>"; };
+		5095A0AB1C954CD800666641 /* THRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THRecord.m; sourceTree = "<group>"; };
+		5095A0AD1C95675500666641 /* THMessageText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THMessageText.h; sourceTree = "<group>"; };
+		5095A0AE1C95675500666641 /* THMessageText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THMessageText.m; sourceTree = "<group>"; };
+		5095A0B61C95851700666641 /* THNoticeCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNoticeCellTableViewCell.h; sourceTree = "<group>"; };
+		5095A0B71C95851700666641 /* THNoticeCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNoticeCellTableViewCell.m; sourceTree = "<group>"; };
+		5098C3781C81B45400305CC9 /* THClassTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THClassTableViewCell.h; sourceTree = "<group>"; };
+		5098C3791C81B45400305CC9 /* THClassTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THClassTableViewCell.m; sourceTree = "<group>"; };
+		50AF8F0B1C96E67200242482 /* THscores.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THscores.h; sourceTree = "<group>"; };
+		50AF8F0C1C96E67200242482 /* THscores.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THscores.m; sourceTree = "<group>"; };
+		50AF8F0D1C96E67200242482 /* THHomeworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THHomeworkViewController.h; sourceTree = "<group>"; };
+		50AF8F0E1C96E67200242482 /* THHomeworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THHomeworkViewController.m; sourceTree = "<group>"; };
+		50B60FDE1C93CB4500FBD892 /* libUMessage_Sdk_1.2.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.2.6.a; sourceTree = "<group>"; };
+		50B60FDF1C93CB4500FBD892 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
+		50B949AD1C4680DC0012F4DA /* THTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THTabBarViewController.h; sourceTree = "<group>"; };
+		50B949AE1C4680DC0012F4DA /* THTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THTabBarViewController.m; sourceTree = "<group>"; };
+		50C89D521C9AE1E6009D1836 /* THFDYViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THFDYViewController.h; sourceTree = "<group>"; };
+		50C89D531C9AE1E6009D1836 /* THFDYViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THFDYViewController.m; sourceTree = "<group>"; };
+		50D5B5301C828CDA00A5C4C7 /* THStudent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THStudent.h; sourceTree = "<group>"; };
+		50D5B5311C828CDA00A5C4C7 /* THStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THStudent.m; sourceTree = "<group>"; };
+		50D5B53B1C82C42C00A5C4C7 /* THStudentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THStudentTableViewCell.h; sourceTree = "<group>"; };
+		50D5B53C1C82C42C00A5C4C7 /* THStudentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THStudentTableViewCell.m; sourceTree = "<group>"; };
+		50D5B5421C83166B00A5C4C7 /* THRepairViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THRepairViewController.h; sourceTree = "<group>"; };
+		50D5B5431C83166B00A5C4C7 /* THRepairViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THRepairViewController.m; sourceTree = "<group>"; };
+		50DE4D4F1C7ED19200AD006C /* THLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLoginViewController.h; sourceTree = "<group>"; };
+		50DE4D501C7ED19200AD006C /* THLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLoginViewController.m; sourceTree = "<group>"; };
+		50DE4D521C7EDFFE00AD006C /* MBProgressHUD+YXX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+YXX.h"; sourceTree = "<group>"; };
+		50DE4D531C7EDFFE00AD006C /* MBProgressHUD+YXX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+YXX.m"; sourceTree = "<group>"; };
+		50DE4D721C7EE32900AD006C /* THSettingGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSettingGroup.h; sourceTree = "<group>"; };
+		50DE4D731C7EE32900AD006C /* THSettingGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSettingGroup.m; sourceTree = "<group>"; };
+		50DE4D741C7EE32900AD006C /* THSettingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSettingItem.h; sourceTree = "<group>"; };
+		50DE4D751C7EE32900AD006C /* THSettingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSettingItem.m; sourceTree = "<group>"; };
+		50DE4D7D1C7EE32900AD006C /* THSetSubAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSetSubAccountViewController.h; sourceTree = "<group>"; };
+		50DE4D7E1C7EE32900AD006C /* THSetSubAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSetSubAccountViewController.m; sourceTree = "<group>"; };
+		50DE4D881C7EE3E600AD006C /* THClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THClass.h; sourceTree = "<group>"; };
+		50DE4D891C7EE3E600AD006C /* THClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THClass.m; sourceTree = "<group>"; };
+		50DE4D8C1C7EE4B200AD006C /* THMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THMainViewController.h; sourceTree = "<group>"; };
+		50DE4D8D1C7EE4B200AD006C /* THMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THMainViewController.m; sourceTree = "<group>"; };
+		50E1B2901C8A76D50060C52C /* UITextfield+UIPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextfield+UIPickView.h"; sourceTree = "<group>"; };
+		50E1B2911C8A76D50060C52C /* UITextfield+UIPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextfield+UIPickView.m"; sourceTree = "<group>"; };
+		50E1B2931C8A771B0060C52C /* YuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YuButton.h; sourceTree = "<group>"; };
+		50E1B2941C8A771B0060C52C /* YuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YuButton.m; sourceTree = "<group>"; };
+		50E1B2971C8A861E0060C52C /* THDetailHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THDetailHistoryViewController.h; sourceTree = "<group>"; };
+		50E1B2981C8A861E0060C52C /* THDetailHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THDetailHistoryViewController.m; sourceTree = "<group>"; };
+		50F1F23D1C8018D100282F33 /* THTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THTopView.h; sourceTree = "<group>"; };
+		50F1F23E1C8018D100282F33 /* THTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THTopView.m; sourceTree = "<group>"; };
+		61B9B4C02C2FED02BA822F19 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		F43BA8A5A2B0E84AE104B9C7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +178,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50B60FE01C93CB4500FBD892 /* libUMessage_Sdk_1.2.6.a in Frameworks */,
+				E3191C50CF786635F43FF0B1 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +200,86 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48049E157D392F4E55D67FFE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F43BA8A5A2B0E84AE104B9C7 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		500062121C4640C8007AC3B6 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				50E1B28F1C8A76C30060C52C /* tool */,
+				50DE4D521C7EDFFE00AD006C /* MBProgressHUD+YXX.h */,
+				50DE4D531C7EDFFE00AD006C /* MBProgressHUD+YXX.m */,
+				500062131C4640C8007AC3B6 /* AppDelegate.h */,
+				500062141C4640C8007AC3B6 /* AppDelegate.m */,
+				500062151C4640C8007AC3B6 /* THPch.pch */,
+				50035A111C8679CC00FF6BF3 /* THClassNameListTool.h */,
+				50035A121C8679CC00FF6BF3 /* THClassNameListTool.m */,
+			);
+			path = other;
+			sourceTree = "<group>";
+		};
+		500062171C46421F007AC3B6 /* tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				50B949AD1C4680DC0012F4DA /* THTabBarViewController.h */,
+				50B949AE1C4680DC0012F4DA /* THTabBarViewController.m */,
+			);
+			path = tabbar;
+			sourceTree = "<group>";
+		};
+		5000621B1C464258007AC3B6 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				50D5B52A1C82812000A5C4C7 /* nextView */,
+				505D43911C477C7100DB17A1 /* classlist */,
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
+		500062201C46432D007AC3B6 /* statistics */ = {
+			isa = PBXGroup;
+			children = (
+				50AF8F091C96E67200242482 /* homework */,
+				50400C6B1C858FAF00372175 /* history */,
+				50400C671C85374D00372175 /* controller */,
+			);
+			path = statistics;
+			sourceTree = "<group>";
+		};
+		50035A141C868CD500FF6BF3 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				50035A151C868CD500FF6BF3 /* THSetStaticViewController.h */,
+				50035A161C868CD500FF6BF3 /* THSetStaticViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		50035A1C1C86CD0300FF6BF3 /* detailNotice */ = {
+			isa = PBXGroup;
+			children = (
+				5095A0B51C9584E900666641 /* view */,
+				5095A0A91C954CCA00666641 /* model */,
+				50035A211C86CD5500FF6BF3 /* THNoticeDetailViewController.h */,
+				50035A221C86CD5500FF6BF3 /* THNoticeDetailViewController.m */,
+			);
+			path = detailNotice;
+			sourceTree = "<group>";
+		};
+		50035A1D1C86CD1F00FF6BF3 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				50035A1E1C86CD1F00FF6BF3 /* THSetNoticeViewController.h */,
+				50035A1F1C86CD1F00FF6BF3 /* THSetNoticeViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
 		500FDD3E1C3F9E740069F2AE = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +287,8 @@
 				500FDD631C3F9E750069F2AE /* TH-2.0Tests */,
 				500FDD6E1C3F9E750069F2AE /* TH-2.0UITests */,
 				500FDD481C3F9E740069F2AE /* Products */,
+				48049E157D392F4E55D67FFE /* Frameworks */,
+				605DD224EA6F601D46A0C32B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,13 +305,15 @@
 		500FDD491C3F9E740069F2AE /* TH-2.0 */ = {
 			isa = PBXGroup;
 			children = (
-				500FDD4D1C3F9E740069F2AE /* AppDelegate.h */,
-				500FDD4E1C3F9E740069F2AE /* AppDelegate.m */,
-				500FDD501C3F9E740069F2AE /* ViewController.h */,
-				500FDD511C3F9E740069F2AE /* ViewController.m */,
-				500FDD531C3F9E740069F2AE /* Main.storyboard */,
-				500FDD561C3F9E740069F2AE /* Assets.xcassets */,
+				50B60FDD1C93CB4500FBD892 /* UMessage_Sdk_1.2.6 */,
+				50DE4D701C7EE32900AD006C /* setting */,
+				50DE4D4E1C7ED16900AD006C /* login */,
+				500062201C46432D007AC3B6 /* statistics */,
+				5000621B1C464258007AC3B6 /* main */,
+				500062171C46421F007AC3B6 /* tabbar */,
+				500062121C4640C8007AC3B6 /* other */,
 				500FDD581C3F9E740069F2AE /* LaunchScreen.storyboard */,
+				503990DA1CA3CA5200D45F2A /* Assets.xcassets */,
 				500FDD5B1C3F9E740069F2AE /* Info.plist */,
 				500FDD4A1C3F9E740069F2AE /* Supporting Files */,
 			);
@@ -140,6 +346,363 @@
 			path = "TH-2.0UITests";
 			sourceTree = "<group>";
 		};
+		501231371C83D22000F4CC6B /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				501231381C83D22000F4CC6B /* THOrderNameViewController.h */,
+				501231391C83D22000F4CC6B /* THOrderNameViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		5012313B1C83D24900F4CC6B /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				5012313C1C83D24900F4CC6B /* THNextViewController.h */,
+				5012313D1C83D24900F4CC6B /* THNextViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		5012313F1C83EA1A00F4CC6B /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				501231401C83EA1A00F4CC6B /* THDetailViewController.h */,
+				501231411C83EA1A00F4CC6B /* THDetailViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		501231421C83EA1A00F4CC6B /* model */ = {
+			isa = PBXGroup;
+			children = (
+				501231431C83EA1A00F4CC6B /* THdetailStudent.h */,
+				501231441C83EA1A00F4CC6B /* THdetailStudent.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		5013EA4F1CA03DA000967169 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				50080CCD1CA2859100E0D324 /* THStudentCollectionViewCell.h */,
+				50080CCE1CA2859100E0D324 /* THStudentCollectionViewCell.m */,
+				50080CD01CA2914000E0D324 /* IconText.h */,
+				50080CD11CA2914000E0D324 /* IconText.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		5029EAC31C94FFB700291FF9 /* setting */ = {
+			isa = PBXGroup;
+			children = (
+				5029EAC41C94FFB700291FF9 /* THSettingTableViewController.h */,
+				5029EAC51C94FFB700291FF9 /* THSettingTableViewController.m */,
+			);
+			path = setting;
+			sourceTree = "<group>";
+		};
+		503990DC1CA40EE200D45F2A /* presentView */ = {
+			isa = PBXGroup;
+			children = (
+				503990DD1CA40F1100D45F2A /* THPresentTableViewController.h */,
+				503990DE1CA40F1100D45F2A /* THPresentTableViewController.m */,
+			);
+			path = presentView;
+			sourceTree = "<group>";
+		};
+		503B96711CA0D5EA00DA3491 /* namelist */ = {
+			isa = PBXGroup;
+			children = (
+				503B96721CA0D5FC00DA3491 /* THNamelistViewController.h */,
+				503B96731CA0D5FC00DA3491 /* THNamelistViewController.m */,
+			);
+			path = namelist;
+			sourceTree = "<group>";
+		};
+		50400C671C85374D00372175 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				50400C681C85374D00372175 /* THStatisticsViewController.h */,
+				50400C691C85374D00372175 /* THStatisticsViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		50400C6B1C858FAF00372175 /* history */ = {
+			isa = PBXGroup;
+			children = (
+				50E1B2961C8A85ED0060C52C /* detailHistory */,
+				50400C6C1C858FAF00372175 /* controller */,
+			);
+			path = history;
+			sourceTree = "<group>";
+		};
+		50400C6C1C858FAF00372175 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				50400C6D1C858FBF00372175 /* THHistoryViewController.h */,
+				50400C6E1C858FBF00372175 /* THHistoryViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		505D43911C477C7100DB17A1 /* classlist */ = {
+			isa = PBXGroup;
+			children = (
+				505D43921C477C8700DB17A1 /* view */,
+				50DE4D8B1C7EE4B200AD006C /* controller */,
+				50DE4D871C7EE3E600AD006C /* model */,
+			);
+			path = classlist;
+			sourceTree = "<group>";
+		};
+		505D43921C477C8700DB17A1 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				50F1F23D1C8018D100282F33 /* THTopView.h */,
+				50F1F23E1C8018D100282F33 /* THTopView.m */,
+				5098C3781C81B45400305CC9 /* THClassTableViewCell.h */,
+				5098C3791C81B45400305CC9 /* THClassTableViewCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		508E40401C92F6B600DE5D98 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				508E40411C92F6D500DE5D98 /* THMessage.h */,
+				508E40421C92F6D500DE5D98 /* THMessage.m */,
+				5029EACA1C951FA000291FF9 /* THAbsenceMessage.h */,
+				5029EACB1C951FA000291FF9 /* THAbsenceMessage.m */,
+				5095A0AD1C95675500666641 /* THMessageText.h */,
+				5095A0AE1C95675500666641 /* THMessageText.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		5095A0A91C954CCA00666641 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				5095A0AA1C954CD800666641 /* THRecord.h */,
+				5095A0AB1C954CD800666641 /* THRecord.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		5095A0B51C9584E900666641 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				5095A0B61C95851700666641 /* THNoticeCellTableViewCell.h */,
+				5095A0B71C95851700666641 /* THNoticeCellTableViewCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		50AF8F091C96E67200242482 /* homework */ = {
+			isa = PBXGroup;
+			children = (
+				50AF8F0A1C96E67200242482 /* model */,
+				50AF8F0D1C96E67200242482 /* THHomeworkViewController.h */,
+				50AF8F0E1C96E67200242482 /* THHomeworkViewController.m */,
+			);
+			path = homework;
+			sourceTree = "<group>";
+		};
+		50AF8F0A1C96E67200242482 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				50AF8F0B1C96E67200242482 /* THscores.h */,
+				50AF8F0C1C96E67200242482 /* THscores.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		50B60FDD1C93CB4500FBD892 /* UMessage_Sdk_1.2.6 */ = {
+			isa = PBXGroup;
+			children = (
+				50B60FDE1C93CB4500FBD892 /* libUMessage_Sdk_1.2.6.a */,
+				50B60FDF1C93CB4500FBD892 /* UMessage.h */,
+			);
+			path = UMessage_Sdk_1.2.6;
+			sourceTree = "<group>";
+		};
+		50C89D511C9AE1D0009D1836 /* FDY */ = {
+			isa = PBXGroup;
+			children = (
+				503990DC1CA40EE200D45F2A /* presentView */,
+				503B96711CA0D5EA00DA3491 /* namelist */,
+				5013EA4F1CA03DA000967169 /* view */,
+				50C89D521C9AE1E6009D1836 /* THFDYViewController.h */,
+				50C89D531C9AE1E6009D1836 /* THFDYViewController.m */,
+			);
+			path = FDY;
+			sourceTree = "<group>";
+		};
+		50D5B52A1C82812000A5C4C7 /* nextView */ = {
+			isa = PBXGroup;
+			children = (
+				5012313B1C83D24900F4CC6B /* controller */,
+				50D5B53E1C83155600A5C4C7 /* repair */,
+				50D5B5361C828D0500A5C4C7 /* detail */,
+				50D5B52E1C828CDA00A5C4C7 /* orderName */,
+			);
+			path = nextView;
+			sourceTree = "<group>";
+		};
+		50D5B52E1C828CDA00A5C4C7 /* orderName */ = {
+			isa = PBXGroup;
+			children = (
+				501231371C83D22000F4CC6B /* controller */,
+				50D5B53A1C82C40F00A5C4C7 /* view */,
+				50D5B52F1C828CDA00A5C4C7 /* model */,
+			);
+			path = orderName;
+			sourceTree = "<group>";
+		};
+		50D5B52F1C828CDA00A5C4C7 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				50D5B5301C828CDA00A5C4C7 /* THStudent.h */,
+				50D5B5311C828CDA00A5C4C7 /* THStudent.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		50D5B5361C828D0500A5C4C7 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				5012313F1C83EA1A00F4CC6B /* controller */,
+				501231421C83EA1A00F4CC6B /* model */,
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
+		50D5B53A1C82C40F00A5C4C7 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				50D5B53B1C82C42C00A5C4C7 /* THStudentTableViewCell.h */,
+				50D5B53C1C82C42C00A5C4C7 /* THStudentTableViewCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		50D5B53E1C83155600A5C4C7 /* repair */ = {
+			isa = PBXGroup;
+			children = (
+				50D5B5421C83166B00A5C4C7 /* THRepairViewController.h */,
+				50D5B5431C83166B00A5C4C7 /* THRepairViewController.m */,
+			);
+			path = repair;
+			sourceTree = "<group>";
+		};
+		50DE4D4E1C7ED16900AD006C /* login */ = {
+			isa = PBXGroup;
+			children = (
+				50DE4D4F1C7ED19200AD006C /* THLoginViewController.h */,
+				50DE4D501C7ED19200AD006C /* THLoginViewController.m */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
+		50DE4D701C7EE32900AD006C /* setting */ = {
+			isa = PBXGroup;
+			children = (
+				50C89D511C9AE1D0009D1836 /* FDY */,
+				5029EAC31C94FFB700291FF9 /* setting */,
+				50DE4D711C7EE32900AD006C /* model */,
+				50DE4D761C7EE32900AD006C /* notice */,
+				50DE4D791C7EE32900AD006C /* Static */,
+				50DE4D7C1C7EE32900AD006C /* subaccount */,
+			);
+			path = setting;
+			sourceTree = "<group>";
+		};
+		50DE4D711C7EE32900AD006C /* model */ = {
+			isa = PBXGroup;
+			children = (
+				50DE4D721C7EE32900AD006C /* THSettingGroup.h */,
+				50DE4D731C7EE32900AD006C /* THSettingGroup.m */,
+				50DE4D741C7EE32900AD006C /* THSettingItem.h */,
+				50DE4D751C7EE32900AD006C /* THSettingItem.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		50DE4D761C7EE32900AD006C /* notice */ = {
+			isa = PBXGroup;
+			children = (
+				508E40401C92F6B600DE5D98 /* model */,
+				50035A1D1C86CD1F00FF6BF3 /* controller */,
+				50035A1C1C86CD0300FF6BF3 /* detailNotice */,
+			);
+			path = notice;
+			sourceTree = "<group>";
+		};
+		50DE4D791C7EE32900AD006C /* Static */ = {
+			isa = PBXGroup;
+			children = (
+				50035A141C868CD500FF6BF3 /* controller */,
+			);
+			path = Static;
+			sourceTree = "<group>";
+		};
+		50DE4D7C1C7EE32900AD006C /* subaccount */ = {
+			isa = PBXGroup;
+			children = (
+				50DE4D7D1C7EE32900AD006C /* THSetSubAccountViewController.h */,
+				50DE4D7E1C7EE32900AD006C /* THSetSubAccountViewController.m */,
+			);
+			path = subaccount;
+			sourceTree = "<group>";
+		};
+		50DE4D871C7EE3E600AD006C /* model */ = {
+			isa = PBXGroup;
+			children = (
+				50DE4D881C7EE3E600AD006C /* THClass.h */,
+				50DE4D891C7EE3E600AD006C /* THClass.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		50DE4D8B1C7EE4B200AD006C /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				50DE4D8C1C7EE4B200AD006C /* THMainViewController.h */,
+				50DE4D8D1C7EE4B200AD006C /* THMainViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		50E1B28F1C8A76C30060C52C /* tool */ = {
+			isa = PBXGroup;
+			children = (
+				50E1B2901C8A76D50060C52C /* UITextfield+UIPickView.h */,
+				50E1B2911C8A76D50060C52C /* UITextfield+UIPickView.m */,
+				50E1B2931C8A771B0060C52C /* YuButton.h */,
+				50E1B2941C8A771B0060C52C /* YuButton.m */,
+			);
+			path = tool;
+			sourceTree = "<group>";
+		};
+		50E1B2961C8A85ED0060C52C /* detailHistory */ = {
+			isa = PBXGroup;
+			children = (
+				50E1B2971C8A861E0060C52C /* THDetailHistoryViewController.h */,
+				50E1B2981C8A861E0060C52C /* THDetailHistoryViewController.m */,
+			);
+			path = detailHistory;
+			sourceTree = "<group>";
+		};
+		605DD224EA6F601D46A0C32B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				61B9B4C02C2FED02BA822F19 /* Pods.debug.xcconfig */,
+				0E4D13A0AE095A59FD433964 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -150,6 +713,8 @@
 				500FDD431C3F9E740069F2AE /* Sources */,
 				500FDD441C3F9E740069F2AE /* Frameworks */,
 				500FDD451C3F9E740069F2AE /* Resources */,
+				4EC335017B710EB2143471A9 /* Embed Pods Frameworks */,
+				F315492E5B775FCAE60737DE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -207,6 +772,7 @@
 				TargetAttributes = {
 					500FDD461C3F9E740069F2AE = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = N85MR7EVWF;
 					};
 					500FDD5F1C3F9E750069F2AE = {
 						CreatedOnToolsVersion = 7.2;
@@ -243,9 +809,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				503990DB1CA3CA5200D45F2A /* Assets.xcassets in Resources */,
 				500FDD5A1C3F9E740069F2AE /* LaunchScreen.storyboard in Resources */,
-				500FDD571C3F9E740069F2AE /* Assets.xcassets in Resources */,
-				500FDD551C3F9E740069F2AE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,14 +830,85 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4EC335017B710EB2143471A9 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F315492E5B775FCAE60737DE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		500FDD431C3F9E740069F2AE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				500FDD521C3F9E740069F2AE /* ViewController.m in Sources */,
-				500FDD4F1C3F9E740069F2AE /* AppDelegate.m in Sources */,
+				5095A0AC1C954CD800666641 /* THRecord.m in Sources */,
+				50035A181C868CD500FF6BF3 /* THSetStaticViewController.m in Sources */,
+				50F1F23F1C8018D100282F33 /* THTopView.m in Sources */,
+				50080CD21CA2914000E0D324 /* IconText.m in Sources */,
+				5012313E1C83D24900F4CC6B /* THNextViewController.m in Sources */,
+				50D5B5441C83166B00A5C4C7 /* THRepairViewController.m in Sources */,
+				500062161C4640C8007AC3B6 /* AppDelegate.m in Sources */,
+				50DE4D821C7EE32900AD006C /* THSettingItem.m in Sources */,
+				503990DF1CA40F1100D45F2A /* THPresentTableViewController.m in Sources */,
+				50DE4D851C7EE32900AD006C /* THSetSubAccountViewController.m in Sources */,
+				5029EACC1C951FA000291FF9 /* THAbsenceMessage.m in Sources */,
+				503B96741CA0D5FC00DA3491 /* THNamelistViewController.m in Sources */,
+				5098C37A1C81B45400305CC9 /* THClassTableViewCell.m in Sources */,
+				50400C6F1C858FBF00372175 /* THHistoryViewController.m in Sources */,
+				5012313A1C83D22000F4CC6B /* THOrderNameViewController.m in Sources */,
+				508E40431C92F6D500DE5D98 /* THMessage.m in Sources */,
+				50035A201C86CD1F00FF6BF3 /* THSetNoticeViewController.m in Sources */,
+				5029EAC61C94FFB700291FF9 /* THSettingTableViewController.m in Sources */,
+				50400C6A1C85374D00372175 /* THStatisticsViewController.m in Sources */,
+				50E1B2921C8A76D50060C52C /* UITextfield+UIPickView.m in Sources */,
+				50D5B5341C828CDA00A5C4C7 /* THStudent.m in Sources */,
+				50E1B2951C8A771B0060C52C /* YuButton.m in Sources */,
+				501231461C83EA1A00F4CC6B /* THdetailStudent.m in Sources */,
+				50DE4D8E1C7EE4B200AD006C /* THMainViewController.m in Sources */,
+				50DE4D8A1C7EE3E600AD006C /* THClass.m in Sources */,
+				50035A231C86CD5500FF6BF3 /* THNoticeDetailViewController.m in Sources */,
+				5095A0B81C95851700666641 /* THNoticeCellTableViewCell.m in Sources */,
+				501231451C83EA1A00F4CC6B /* THDetailViewController.m in Sources */,
+				50DE4D811C7EE32900AD006C /* THSettingGroup.m in Sources */,
+				50E1B2991C8A861E0060C52C /* THDetailHistoryViewController.m in Sources */,
+				50DE4D511C7ED19200AD006C /* THLoginViewController.m in Sources */,
+				50080CCF1CA2859100E0D324 /* THStudentCollectionViewCell.m in Sources */,
 				500FDD4C1C3F9E740069F2AE /* main.m in Sources */,
+				50B949AF1C4680DC0012F4DA /* THTabBarViewController.m in Sources */,
+				5095A0AF1C95675500666641 /* THMessageText.m in Sources */,
+				50C89D541C9AE1E6009D1836 /* THFDYViewController.m in Sources */,
+				50AF8F0F1C96E67200242482 /* THscores.m in Sources */,
+				50AF8F101C96E67200242482 /* THHomeworkViewController.m in Sources */,
+				50035A131C8679CC00FF6BF3 /* THClassNameListTool.m in Sources */,
+				50DE4D541C7EDFFE00AD006C /* MBProgressHUD+YXX.m in Sources */,
+				50D5B53D1C82C42C00A5C4C7 /* THStudentTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,14 +944,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		500FDD531C3F9E740069F2AE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				500FDD541C3F9E740069F2AE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		500FDD581C3F9E740069F2AE /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -411,23 +1039,85 @@
 		};
 		500FDD751C3F9E750069F2AE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61B9B4C02C2FED02BA822F19 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PREFIX_HEADER = "/Users/yuxiangxiang/Desktop/Teacher-Helper/TH-2.0/TH-2.0/other/THPch.pch";
 				INFOPLIST_FILE = "TH-2.0/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.HDU.Teacher-Help.TH-2-0";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TH-2.0/UMessage_Sdk_1.2.6",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"FMDB\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"Masonry\"",
+					"-l\"MinugUtils\"",
+					"-l\"sqlite3\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.edu.teacherhelp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		500FDD761C3F9E750069F2AE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E4D13A0AE095A59FD433964 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PREFIX_HEADER = "/Users/yuxiangxiang/Desktop/Teacher-Helper/TH-2.0/TH-2.0/other/THPch.pch";
 				INFOPLIST_FILE = "TH-2.0/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.HDU.Teacher-Help.TH-2-0";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TH-2.0/UMessage_Sdk_1.2.6",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"FMDB\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"Masonry\"",
+					"-l\"MinugUtils\"",
+					"-l\"sqlite3\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.edu.teacherhelp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -498,6 +1188,7 @@
 				500FDD761C3F9E750069F2AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		500FDD771C3F9E750069F2AE /* Build configuration list for PBXNativeTarget "TH-2.0Tests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +1197,7 @@
 				500FDD791C3F9E750069F2AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		500FDD7A1C3F9E750069F2AE /* Build configuration list for PBXNativeTarget "TH-2.0UITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +1206,7 @@
 				500FDD7C1C3F9E750069F2AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

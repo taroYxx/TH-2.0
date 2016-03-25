@@ -1,0 +1,60 @@
+PODS:
+  - AFNetworking (2.6.3):
+    - AFNetworking/NSURLConnection (= 2.6.3)
+    - AFNetworking/NSURLSession (= 2.6.3)
+    - AFNetworking/Reachability (= 2.6.3)
+    - AFNetworking/Security (= 2.6.3)
+    - AFNetworking/Serialization (= 2.6.3)
+    - AFNetworking/UIKit (= 2.6.3)
+  - AFNetworking/NSURLConnection (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.6.3)
+  - AFNetworking/Security (2.6.3)
+  - AFNetworking/Serialization (2.6.3)
+  - AFNetworking/UIKit (2.6.3):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - FMDB (2.5):
+    - FMDB/standard (= 2.5)
+  - FMDB/common (2.5)
+  - FMDB/standard (2.5):
+    - FMDB/common
+  - IQKeyboardManager (3.3.4)
+  - Masonry (0.6.3)
+  - MBProgressHUD (0.9.1)
+  - MinugUtils (1.0.16):
+    - AFNetworking
+    - Masonry
+    - MBProgressHUD
+  - MJPopupViewController (0.4)
+  - MJRefresh (3.0.7)
+  - XYPieChart (0.2)
+
+DEPENDENCIES:
+  - AFNetworking
+  - FMDB
+  - IQKeyboardManager
+  - Masonry
+  - MinugUtils
+  - MJPopupViewController
+  - MJRefresh
+  - XYPieChart
+
+SPEC CHECKSUMS:
+  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
+  IQKeyboardManager: ac803e61e5b50efae6b3aeedd95a02c7c7d3b2b3
+  Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MinugUtils: e3c21f44efbcf09929b05d28669b19891cb67ae7
+  MJPopupViewController: e9ad553a3145eb8126ba2748e872ae7fb25cc605
+  MJRefresh: f3e1228ec3d38c7ba5208d58032631a52f39f495
+  XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
+
+COCOAPODS: 0.39.0
