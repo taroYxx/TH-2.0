@@ -10,7 +10,7 @@
 
 @interface THRecord : NSObject
 
-@property (nonatomic , strong) NSString * teacherName;
+@property (nonatomic , strong) NSString * courseTeacher;
 @property (nonatomic , strong) NSString * courseName;
 @property (nonatomic , strong) NSString * courseNo;
 @property (nonatomic , strong) NSNumber * courseId;

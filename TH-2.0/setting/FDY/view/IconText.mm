@@ -21,6 +21,7 @@
         self.label.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.label];
 //        self.backgroundColor = [UIColor redColor];
+        self.label.adjustsFontSizeToFitWidth = YES;
         self.layer.borderWidth = 2;
         self.layer.borderColor = [YColor(207, 85, 89, 1) CGColor];
         

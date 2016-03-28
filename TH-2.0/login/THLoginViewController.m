@@ -105,10 +105,10 @@
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [MBProgressHUD showMessage:@"正在登入" toView:self.view];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        
+//    });
     
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     NSDictionary* bodyParameters = @{
@@ -116,7 +116,7 @@
                                      @"password":self.password.text,
                                      
                                      };
-//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     NSString *urlStr = [NSString stringWithFormat:@"%@/%@/teacher_login/",host,version];
     [manager POST:urlStr parameters:bodyParameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         THLog(@"%@",responseObject);
@@ -183,8 +183,15 @@
             
         }else if (status.intValue == 3){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"系统信息" message:@"用户不存在或密码不存在" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
-            [alertView show];
+            [MBProgressHUD showMessage:@"正在获取数据当中，请耐性等待" toView:self.view];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"系统信息" message:@"获取成功，请重新登入" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                            [alertView show];
+            });
+     
+//            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"系统信息" message:@"用户不存在或密码不存在" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+//            [alertView show];
             
         }else if (status.intValue == 2){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

@@ -14,6 +14,7 @@
 
 @interface THHomeworkViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic , weak) UISegmentedControl* segment;
+//@property (nonatomic , weak) UIButton * button;
 @property (nonatomic , strong) NSMutableArray * model;
 @property (nonatomic , weak) UITableView * tableView;
 
@@ -26,7 +27,8 @@
     self.model = [NSMutableArray array];
 
     self.view.backgroundColor = [UIColor whiteColor];
-   
+ 
+    
 
     [self getDataFromServe:^(NSArray *array) {
         
@@ -103,6 +105,7 @@
     
     
 }
+
 
 
 @end

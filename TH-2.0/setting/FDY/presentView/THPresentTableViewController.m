@@ -44,6 +44,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
     }
+
     cell.textLabel.text = [NSString stringWithFormat:@"%@班",self.tableViewData[indexPath.row]];
     return cell;
 }

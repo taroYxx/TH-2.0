@@ -20,6 +20,7 @@
 @interface THSettingTableViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic , strong) NSMutableArray * groups;
 
+
 @end
 
 @implementation THSettingTableViewController
@@ -46,7 +47,8 @@
     [self setGroup2];
     [self setgroup3];
     
- 
+    
+    
     
     
     UIBarButtonItem *logoff = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStyleDone target:self action:@selector(logOff)];
@@ -77,6 +79,8 @@
 }
 
 - (void)setGroup2{
+    
+
     THSettingGroup *group = [[THSettingGroup alloc] init];
     group.headerTitle = @"功能设置";
     THSettingItem *item = [THSettingItem itemWithTitle:@"消息通知"];
@@ -84,10 +88,13 @@
     THSettingItem *item2 = [THSettingItem itemWithTitle:@"设置统计百分比"];
     THSettingItem *item3 = [THSettingItem itemWithTitle:@"辅导员选项"];
 //    item.nextController = [[THSetNoticeViewController alloc] init];
-    THSetNoticeViewController *notice = [[THSetNoticeViewController alloc] init];
-    item.nextController = notice;
+//    THSetNoticeViewController *notice = [[THSetNoticeViewController alloc] init];
+//    item.nextController = notice;
+    
 //    notice.noticeData = self.noticeData;
-    item1.nextController = [[THSetSubAccountViewController alloc] init];
+    
+//    THSetSubAccountViewController *setSubAccount = [[THSetSubAccountViewController alloc] init];
+//    item1.nextController = setSubAccount;
     UILabel *label = [[UILabel alloc] init];
     label.backgroundColor = [UIColor redColor];
     label.frame = CGRectMake(screenW-60, 11, 20, 20);
@@ -102,9 +109,9 @@
     }
     
 //    [cell addSubview:label];
-    THSetStaticViewController *statice = [[THSetStaticViewController alloc] init];
-    statice.classlist = self.classlist;
-    item2.nextController = statice;
+//    THSetStaticViewController *statice = [[THSetStaticViewController alloc] init];
+//    statice.classlist = self.classlist;
+//    item2.nextController = statice;
     item.iconImage = [UIImage imageNamed:@"msg"];
     item1.iconImage = [UIImage imageNamed:@"assistant"];
     item2.iconImage = [UIImage imageNamed:@"per"];
@@ -112,12 +119,13 @@
     // 辅导员图标没设置
     item3.iconImage = [UIImage imageNamed:@"eye"];
     
-    THFDYViewController *fdy = [[THFDYViewController alloc] init];
-    item3.nextController = fdy;
+//    THFDYViewController *fdy = [[THFDYViewController alloc] init];
+//    item3.nextController = fdy;
     
     group.items = @[item,item1,item2,item3];
     [self.groups addObject:group];
     
+
    
 }
 
@@ -163,18 +171,43 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    THSettingGroup *group = self.groups[indexPath.section];
-    THSettingItem *item = group.items[indexPath.row];
+//    THSettingGroup *group = self.groups[indexPath.section];
+//    THSettingItem *item = group.items[indexPath.row];
 
-    if(item.nextController){
-        [self.navigationController pushViewController:item.nextController animated:YES];
-        item.label.hidden = YES;
+//    if(item.nextController){
+//        [self.navigationController pushViewController:item.nextController animated:YES];
+//        item.label.hidden = YES;
+//    }
+    if (indexPath.section == 1) {
+        switch (indexPath.row) {
+            case 0:{
+                THSetNoticeViewController *notice = [[THSetNoticeViewController alloc] init];
+                [self.navigationController pushViewController:notice animated:YES];
+                break;
+            }
+            case 1:{
+                THSetSubAccountViewController *setSubAccount = [[THSetSubAccountViewController alloc] init];
+                [self.navigationController pushViewController:setSubAccount animated:YES];
+                break;
+            }
+            case 2:{
+                THSetStaticViewController *statice = [[THSetStaticViewController alloc] init];
+                statice.classlist = self.classlist;
+                [self.navigationController pushViewController:statice animated:YES];
+                break;
+            }
+            case 3:{
+                THFDYViewController *fdy = [[THFDYViewController alloc] init];
+                [self.navigationController pushViewController:fdy animated:YES];
+            }
+        }
     }
+    
+    
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
     backItem.title = @"返回";
     [self.navigationController.navigationBar setTintColor:YColor(209, 84, 87, 1)];
     self.navigationItem.backBarButtonItem = backItem;
-    
     if (indexPath.row == 0 && indexPath.section == 2) {
         
         NSString *appid = @"1068467929";

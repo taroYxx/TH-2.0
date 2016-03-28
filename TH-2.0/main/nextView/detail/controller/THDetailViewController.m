@@ -72,7 +72,11 @@
     [self.pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
     [self.pieChart setPieCenter:CGPointMake(screenW/2, screenH/2-R)];
     [self.pieChart setLabelShadowColor:[UIColor blackColor]];
-    //    [self.pieChart setShowPercentage:NO];
+//    [self.pieChart setShouldGroupAccessibilityChildren:YES];
+//    [self.pieChart setShowLabel:YES];
+    
+    
+        [self.pieChart setShowPercentage:NO];
     self.nameOfSlice = [NSMutableArray arrayWithObjects:@"缺席",@"请假",@"迟到",@"已到",nil];
     self.colorOfSlice =[NSMutableArray arrayWithObjects:
                         YColor(208, 85, 90, 2),
@@ -116,7 +120,10 @@
     return [self.colorOfSlice objectAtIndex:(index % self.colorOfSlice.count)];
 }
 - (NSString *)pieChart:(XYPieChart *)pieChart textForSliceAtIndex:(NSUInteger)index{
-    return [self.nameOfSlice objectAtIndex:index];
+
+    NSNumber *number = [self.slices objectAtIndex:index];
+    
+    return [NSString stringWithFormat:@"%0.1f %%", number.floatValue / 360 * 100];
 }
 
 - (void)addButton{

@@ -16,6 +16,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "MBProgressHUD+YXX.h"
 #import "THLoginViewController.h"
+#import "THSettingTableViewController.h"
 
 @interface THMainViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 
@@ -26,6 +27,7 @@
 @property (nonatomic , strong) FMDatabase * db;
 //@property (nonatomic , strong) NSArray * allDay;
 @property (nonatomic , strong) NSNumber * weekOrdinal;
+
 
 
 @property (nonatomic , strong) NSMutableArray * allday;
@@ -51,10 +53,8 @@
         if (array) {
         //获得周数
             self.weekOrdinal = [array objectAtIndex:0][@"weekOrdinal"];}
-        UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:1];
-        THStatisticsViewController *statistic = [nav.viewControllers objectAtIndex:0];
-        statistic.classList = array;
-        
+   
+
         
         //星期判断
         NSArray *result = array;
@@ -94,11 +94,23 @@
             [dict setValue:afternoon forKey:@"afternoon"];
             [dict setValue:evening forKey:@"evening"];
             [self.allday addObject:dict];
-         
+            
+        
             
         }
+     
        [self addTableviewToScrollView];
        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:2];
+        THSettingTableViewController  *setting = [nav.viewControllers objectAtIndex:0];
+        setting.classlist = array;
+        UINavigationController *nav1 = [self.tabBarController.viewControllers objectAtIndex:1];
+        THStatisticsViewController  *statist = [nav1.viewControllers objectAtIndex:0];
+        statist.classList = array;
+    
+        
+        
 
     }];
     

@@ -48,6 +48,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(150, screenH/2+50, screenW-170, 20)];
     [slider setTintColor:YColor(208, 86, 90, 1)];
+//    slider.minimumValue = 5.0;
+    
     [self.view addSubview:slider];
     [slider addTarget:self action:@selector(sliderValueChange:) forControlEvents:UIControlEventValueChanged];
     _slider = slider;
@@ -87,9 +89,13 @@
     [self addPiechart];
     NSMutableArray *mutableArray = [NSMutableArray array];
     NSMutableArray *classId = [NSMutableArray array];
-    NSArray *array = [THClassNameListTool getDataFromDatabase];
-    for (THClass *allclass in array) {
-        THClass *class = allclass;
+    
+    NSArray *array = self.classlist;
+
+    for (NSDictionary *dict in array) {
+        THClass *class = [THClass classWithDic:dict];
+        
+        
         [mutableArray addObject:class.courseName];
         [classId addObject:class.courseId];
     }
@@ -191,7 +197,12 @@
 }
 
 - (void)sliderValueChange:(id)sender{
+  
+
     UISlider *control = (UISlider *)sender;
+
+    
+    
         float kaoqin = control.value * 360;
         float zuoye = (1-control.value) * 360;
         self.slices = @[[NSNumber numberWithFloat:kaoqin],[NSNumber numberWithFloat:zuoye
@@ -217,6 +228,7 @@
     self.subcourseId = self.courseId[row];
 
 }
+
 
 
 @end

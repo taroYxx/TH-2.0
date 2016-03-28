@@ -57,6 +57,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
   
+    THLog(@"%ld",self.tableViewData.count);
     return self.tableViewData.count;
     
 }
@@ -64,13 +65,40 @@
 {
     static NSString *ID = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        UILabel *courseName = [[UILabel alloc] init];
+        courseName.font = [UIFont systemFontOfSize:19];
+        courseName.frame = CGRectMake(10, 5, screenW-40+5, 30);
+        //    courseName.backgroundColor = [UIColor orangeColor];
+        
+        UILabel *teacherName = [[UILabel alloc] init];
+        teacherName.frame = CGRectMake(150, 40, 100, 30);
+        self.teacherName = teacherName;
+        //    teacherName.backgroundColor = [UIColor orangeColor];
+        
+        UILabel *courseNo = [[UILabel alloc] init];
+        courseNo.frame = CGRectMake(10, 40, 100, 30);
+        self.courseNo = courseNo;
+        
+        UILabel *time = [[UILabel alloc] init];
+        time.frame = CGRectMake(150, 75, 100, 20);
+        //    time.backgroundColor = [UIColor orangeColor];
+        time.adjustsFontSizeToFitWidth = YES;
+        self.time = time;
+        [cell addSubview:teacherName];
+        [cell addSubview:courseName];
+        [cell addSubview:time];
+//        [cell addSubview:courseNo];
+        
     }
     THRecord *recode = self.tableViewData[indexPath.row];
-    cell.textLabel.text = recode.courseName;
+    self.courseName.text = recode.courseName;
+    self.teacherName.text = recode.courseTeacher;
+//    courseNo.text = recode.courseNo;
+    NSRange range = NSMakeRange(0,10);
+    self.time.text = [NSString stringWithFormat:@"第%@周   %@",recode.week,[recode.ctime substringWithRange:range]] ;
     return cell;
 }
 

@@ -19,4 +19,8 @@
 @property (nonatomic , strong) IconText * major;
 @property (nonatomic , strong) UITableView * tableView;
 @property (nonatomic , strong) NSArray * tableViewData;
+@property (nonatomic , weak) UILabel * courseName;
+@property (nonatomic , weak) UILabel * teacherName;
+@property (nonatomic , weak) UILabel * courseNo;
+@property (nonatomic , weak) UILabel * time;
 @end

@@ -39,6 +39,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated ];
+    
     [self.tableview.mj_header beginRefreshing];
 }
 
@@ -202,7 +204,7 @@
                 [self.db executeUpdate:sql];
                 for (NSDictionary *recordDic in message.records) {
                     THRecord *record = [THRecord recodeWithDic:recordDic];
-                    NSString *string = [NSString stringWithFormat:@"INSERT INTO record (studentId, teacherName, courseName, courseNo, courseId) VALUES (%@, '%@', '%@','%@', %@)",message.studentId, record.teacherName,record.courseName, record.courseNo,record.courseId];
+                    NSString *string = [NSString stringWithFormat:@"INSERT INTO record (studentId, teacherName, courseName, courseNo, courseId) VALUES (%@, '%@', '%@','%@', %@)",message.studentId, record.courseTeacher,record.courseName, record.courseNo,record.courseId];
                     [self.db executeUpdate:string];
                 }
             }

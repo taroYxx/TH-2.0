@@ -28,6 +28,7 @@
 @property (nonatomic , strong) NSArray * totalModel;
 
 
+
 @end
 
 @implementation THFDYViewController
@@ -46,7 +47,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
        self.automaticallyAdjustsScrollViewInsets = NO;
   
-    
+
    
     
 //    UIButton *btn = [[UIButton alloc] init];
@@ -65,73 +66,89 @@
     UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(chooseItem)];
     self.navigationItem.rightBarButtonItem = rightBtn;
     
+    UILabel *notext = [[UILabel alloc] init];
+    notext.text = @"无信息";
+    notext.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:notext];
+    [notext mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view);
+        make.centerY.mas_equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(150, 50));
+    }];
+    
     [self getDataFromServer:^(NSArray *array) {
-
-        NSMutableArray *classNoArray = [NSMutableArray array];
-        NSMutableArray *totolModel = [NSMutableArray array];
-        for (NSDictionary *dict in array) {
-          NSNumber *classNo = dict[@"classId"];
-            [classNoArray addObject:classNo];
-            
-            NSArray *student = dict[@"students"];
-            
-            NSMutableArray *modelArray = [NSMutableArray array];
-            for (NSDictionary *studentDict in student) {
-                NSArray *records = studentDict[@"records"];
-                NSString *studentNo = studentDict[@"studentNo"];
-                NSString *classNo = studentDict[@"classNo"];
-                NSString *major = studentDict[@"major"];
-                NSString *name = studentDict[@"name"];
-                NSNumber *studentId= studentDict[@"studentId"];
-            
-            
-                NSMutableArray *recodeModel = [NSMutableArray array];
-                for (NSDictionary *recodedict in records) {
-                    THRecord *recodeM = [THRecord recodeWithDic:recodedict];
-                    [recodeModel addObject:recodeM];
+        THLog(@"%@",array);
+        if (array.count > 0) {
+            NSMutableArray *classNoArray = [NSMutableArray array];
+            NSMutableArray *totolModel = [NSMutableArray array];
+            for (NSDictionary *dict in array) {
+                NSNumber *classNo = dict[@"classNo"];
+                [classNoArray addObject:classNo];
+                
+                NSArray *student = dict[@"students"];
+                
+                NSMutableArray *modelArray = [NSMutableArray array];
+                for (NSDictionary *studentDict in student) {
+                    NSArray *records = studentDict[@"records"];
+                    NSString *studentNo = studentDict[@"studentNo"];
+                    NSString *classNo = studentDict[@"classNo"];
+                    NSString *major = studentDict[@"major"];
+                    NSString *name = studentDict[@"name"];
+                    NSNumber *studentId= studentDict[@"studentId"];
+                    
+                    
+                    NSMutableArray *recodeModel = [NSMutableArray array];
+                    for (NSDictionary *recodedict in records) {
+                        THRecord *recodeM = [THRecord recodeWithDic:recodedict];
+                        [recodeModel addObject:recodeM];
+                    }
+                    NSDictionary *dict1 = @{
+                                            @"records" :recodeModel,
+                                            @"studentNo" : studentNo,
+                                            @"classNo" : classNo,
+                                            @"major" : major,
+                                            @"name" : name,
+                                            @"studentId" : studentId
+                                            };
+                    THMessage *studentModel = [THMessage messageWithDic:dict1];
+                    [modelArray addObject:studentModel];
                 }
-                 NSDictionary *dict1 = @{
-                                         @"records" :recodeModel,
-                                         @"studentNo" : studentNo,
-                                         @"classNo" : classNo,
-                                         @"major" : major,
-                                         @"name" : name,
-                                         @"studentId" : studentId
-                                         };
-                THMessage *studentModel = [THMessage messageWithDic:dict1];
-                [modelArray addObject:studentModel];
+                self.student = student;
+                [totolModel addObject:modelArray];
+                //            self.studentModel = modelArray;
             }
-                   self.student = student;
-            [totolModel addObject:modelArray];
-//            self.studentModel = modelArray;
-        }
-        self.studentModel = totolModel[0];
-        self.totalModel = totolModel;
-        self.classNolist = classNoArray;
-        if (classNoArray.count > 0) {
-            self.navigationItem.title = [NSString stringWithFormat:@"%@班",classNoArray[0]];
+            
+            self.studentModel = totolModel[0];
+            self.totalModel = totolModel;
+            self.classNolist = classNoArray;
+            if (classNoArray.count > 0) {
+                self.navigationItem.title = [NSString stringWithFormat:@"%@班",classNoArray[0]];
+            }
+            
+            UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
+            [flowlayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+            UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(20, 68, screenW-40+5, screenH-68-50)collectionViewLayout:flowlayout];
+            flowlayout.itemSize = collectionView.frame.size;
+            //清空行距
+            flowlayout.minimumLineSpacing = 0;
+            [collectionView registerClass:[THStudentCollectionViewCell class] forCellWithReuseIdentifier:@"collect"];
+            collectionView.backgroundColor = [UIColor whiteColor];
+            
+            collectionView.dataSource = self;
+            collectionView.delegate = self;
+            collectionView.pagingEnabled = YES;
+            collectionView.showsHorizontalScrollIndicator = NO;
+            
+            [self.view addSubview:collectionView];
+            self.collection = collectionView;
+            self.pageNo = @0;
+            [self setClassLabel];
+
         }
         
   ///
         
-        UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
-        [flowlayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(20, 68, screenW-40+5, screenH-68-50)collectionViewLayout:flowlayout];
-        flowlayout.itemSize = collectionView.frame.size;
-        //清空行距
-        flowlayout.minimumLineSpacing = 0;
-        [collectionView registerClass:[THStudentCollectionViewCell class] forCellWithReuseIdentifier:@"collect"];
-        collectionView.backgroundColor = [UIColor whiteColor];
         
-        collectionView.dataSource = self;
-        collectionView.delegate = self;
-        collectionView.pagingEnabled = YES;
-        collectionView.showsHorizontalScrollIndicator = NO;
-
-        [self.view addSubview:collectionView];
-        self.collection = collectionView;
-        self.pageNo = @0;
-        [self setClassLabel];
    }];
     
     
@@ -143,7 +160,7 @@
 
 - (void)setClassLabel{
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(screenW/3, screenH-50, screenW/3, 30)];
-    label.text = [NSString stringWithFormat:@"1/%ld",self.student.count];
+    label.text = [NSString stringWithFormat:@"1/%ld",self.studentModel.count];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = YColor(207, 85, 89, 1);
     [self.view addSubview:label];
@@ -218,11 +235,12 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    return self.student.count;
+    return self.studentModel.count;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 
 {
+
     THStudentCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collect" forIndexPath:indexPath];
     THMessage *student = self.studentModel[indexPath.row];
        cell.studentName.label.text = student.name;
@@ -230,6 +248,7 @@
        cell.studentNo.label.text = student.studentNo;
        cell.major.label.text = student.major;
        cell.tableViewData = student.records;
+
   
 //        UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(40, 20, screenW-80, 40)];
 //        name.text = self.namelist[indexPath.row];
@@ -268,7 +287,7 @@
     
     int page = scrollView.contentOffset.x / (screenW-40+5)+0.1;
     self.pageNo = [NSNumber numberWithInt:page+1];
-    self.label.text = [NSString stringWithFormat:@"%@/%ld",self.pageNo,self.student.count];
+    self.label.text = [NSString stringWithFormat:@"%@/%ld",self.pageNo,self.studentModel.count];
    
 }
 
@@ -279,7 +298,7 @@
     [self.collection reloadData];
      [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
      [self.collection setContentOffset:CGPointMake(0, 0) animated:YES];
-       self.label.text = [NSString stringWithFormat:@"1/%ld",self.student.count];
+       self.label.text = [NSString stringWithFormat:@"1/%ld",self.studentModel.count];
 }
 //
 -(void)sendValue:(NSUInteger )number{
@@ -287,7 +306,7 @@
     [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
     CGFloat x =  number * (screenW-40+5);
     [self.collection setContentOffset:CGPointMake(x, 0) animated:YES];
-    self.label.text = [NSString stringWithFormat:@"%ld/%ld",number+1,self.student.count];
+    self.label.text = [NSString stringWithFormat:@"%ld/%ld",number+1,self.studentModel.count];
   
 }
 
@@ -311,7 +330,6 @@
 //        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"name"];
 //        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"teacherNo"];
     }];
-    
 }
 
 @end

@@ -14,7 +14,7 @@
 - (instancetype)initWithDic:(NSDictionary *)dic
 {
     if (self = [super init]) {
-        self.teacherName = dic[@"teacherName"];
+        self.courseTeacher = dic[@"courseTeacher"];
         self.courseName = dic[@"courseName"];
         self.courseId = dic[@"courseId"];
         self.courseNo = dic[@"courseNo"];

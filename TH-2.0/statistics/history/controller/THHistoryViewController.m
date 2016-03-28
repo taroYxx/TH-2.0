@@ -13,12 +13,15 @@
 #import "THDetailHistoryViewController.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "MBProgressHUD+YXX.h"
+#import <MJPopupViewController/UIViewController+MJPopupViewController.h>
+#import "THGetWeekTableViewController.h"
 
 @interface THHistoryViewController ()<XYPieChartDataSource,XYPieChartDelegate>
 
 
 @property (nonatomic , strong) UIPickerView * pickview;
 @property (nonatomic , weak) UIButton * button;
+@property (nonatomic , weak) UIButton * rightBtn;
 @property (nonatomic , weak) UITextfield_UIPickView *textfield;
 @property (nonatomic , strong) XYPieChart * pieChart;
 @property (nonatomic , strong) NSArray * slices;
@@ -50,8 +53,18 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self addTitleView];
     [self addsegment];
-    UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(chooseWeek)];
-    self.navigationItem.rightBarButtonItem = rightBtn;
+   
+    UIButton *btn = [[UIButton alloc] init];
+    btn.frame = CGRectMake(0, 0, 70, 30);
+    [btn setTitle:@"第一周" forState:UIControlStateNormal];
+    [btn setTitleColor:YColor(207, 85, 89, 1) forState:UIControlStateNormal];
+    btn.hidden = YES;
+    [btn addTarget:self action:@selector(chooseWeek) forControlEvents:UIControlEventTouchUpInside];
+    self.rightBtn = btn;
+    
+    
+    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    self.navigationItem.rightBarButtonItem = right;
     
     [self getDataFromServers:^(NSDictionary *dict) {
         NSInteger absence = [dict[@"absenceProportion"]floatValue]*360;
@@ -96,9 +109,7 @@
     
 }
 
-- (void)chooseWeek{
-    
-}
+
 
 - (void)addsegment{
     NSArray *segmentTitle = @[@"考勤统计",@"平时作业"];
@@ -110,19 +121,37 @@
     [_segment addTarget:self action:@selector(didSelectSegment:) forControlEvents:UIControlEventValueChanged];
 }
 
+- (void)chooseWeek{
+    THLog(@"choose");
+    
+
+    [self getWeekFromServers:^(NSDictionary *dict) {
+//        THLog(@"%@",dict);
+        THGetWeekTableViewController *present = [[THGetWeekTableViewController alloc] init];
+        present.view.frame = CGRectMake(0, 0, screenW-100, screenW-10);
+        present.tableViewData = dict[@"weekList"];
+        
+        [self presentPopupViewController:present animationType:MJPopupViewAnimationFade];
+    }];
+    
+}
+
 - (void)didSelectSegment:(UISegmentedControl *)sender{
     sender = _segment;
     if (sender.selectedSegmentIndex == 0) {
         self.view.hidden = NO;
         _homework.view.hidden = YES;
+        self.rightBtn.hidden = YES;
     }else if(sender.selectedSegmentIndex == 1){
         if (!_homework)
         {
+           
             _homework = [[THHomeworkViewController alloc] init];
             _homework.courseId = self.courseId;
             _homework.view.frame = CGRectMake(0, 64+43, screenW, screenH-64-43);
             [self.view addSubview:_homework.view];
         }
+         self.rightBtn.hidden = NO;
         _homework.view.hidden = NO;
     }
 }
@@ -232,7 +261,7 @@
     [self.pieChart setLabelShadowColor:[UIColor blackColor]];
     
 
-    //    [self.pieChart setShowPercentage:NO];
+        [self.pieChart setShowPercentage:NO];
     self.nameOfSlice = [NSMutableArray arrayWithObjects:@"缺席名单",@"请假名单",@"迟到名单",@"已到名单",nil];
     self.colorOfSlice =[NSMutableArray arrayWithObjects:
                         YColor(208, 85, 90, 2),
@@ -330,6 +359,25 @@
     }];
 }
 
+- (void)getWeekFromServers:(void(^)(NSDictionary  * dict))success{
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    NSDictionary *requestData = @{
+                                  @"courseId" : self.courseId,
+                                  };
+    NSString *url = [NSString stringWithFormat:@"%@/%@/homework_weeks/",host,version];
+    [manager POST:url parameters:requestData success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSDictionary *dict = responseObject;
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            if (success) {
+                success(dict);
+            }
+        }];
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        THLog(@"%@",error);
+    }];
+}
+
+
 - (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
 {
     return self.slices.count;
@@ -343,7 +391,9 @@
     return [self.colorOfSlice objectAtIndex:(index % self.colorOfSlice.count)];
 }
 - (NSString *)pieChart:(XYPieChart *)pieChart textForSliceAtIndex:(NSUInteger)index{
-    return [self.nameOfSlice objectAtIndex:index];
+    NSNumber *number = [self.slices objectAtIndex:index];
+    
+    return [NSString stringWithFormat:@"%0.1f %%", number.floatValue / 360 * 100];
 }
 
 @end
