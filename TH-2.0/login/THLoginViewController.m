@@ -22,6 +22,8 @@
 @property (nonatomic , weak) UIView *iconbg;
 @property (nonatomic , weak) UIView *textbg;
 @property (nonatomic , strong) FMDatabase * db;
+@property (nonatomic , strong) NSNumber * status;
+@property (nonatomic , weak) UILabel * label;
 @end
 
 @implementation THLoginViewController
@@ -122,87 +124,75 @@
         THLog(@"%@",responseObject);
         THLog(@"%@",[operation.response allHeaderFields][@"set-Cookie"]);
         NSNumber *status = responseObject[@"status"];
+//        NSNumber *status = @3;
+       
         
         if (status.intValue == 1) {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            UIWindow *window = [UIApplication sharedApplication].keyWindow;
+            THTabBarViewController *tab = [[THTabBarViewController alloc] init];
+            THMainViewController *main = [[THMainViewController alloc] init];
+            UINavigationController *nav = [tab.viewControllers objectAtIndex:0];
+            main = [nav.viewControllers objectAtIndex:0];
+            main.cookie = [operation.response allHeaderFields][@"set-Cookie"];
+            window.rootViewController = tab;
+                        NSString *messtype = [NSString stringWithFormat:@"%@",self.username.text];
+                        [UMessage addAlias:messtype type:@"username" response:^(id responseObject, NSError *error) {
+                            if(responseObject)
+                            {
+                                THLog(@"%@",responseObject);
+                            }
+                            else
+                            {
+                                THLog(@"%@",error);
+                            }
             
-//            [self getClassTable:^(NSArray *array) {
-//                NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject] stringByAppendingPathComponent:@"student.sqlite"];
-//                _db = [FMDatabase databaseWithPath:path];
-//                THLog(@"%@",path);
-//                self.db = [FMDatabase databaseWithPath:path];
-//                [self.db open];
-            
-                
-                
-                UIWindow *window = [UIApplication sharedApplication].keyWindow;
-                THTabBarViewController *tab = [[THTabBarViewController alloc] init];
-                THMainViewController *main = [[THMainViewController alloc] init];
-                UINavigationController *nav = [tab.viewControllers objectAtIndex:0];
-                main = [nav.viewControllers objectAtIndex:0];
-                main.cookie = [operation.response allHeaderFields][@"set-Cookie"];
-                window.rootViewController = tab;
-                            NSString *messtype = [NSString stringWithFormat:@"%@",self.username.text];
-                            [UMessage addAlias:messtype type:@"username" response:^(id responseObject, NSError *error) {
-                                if(responseObject)
-                                {
-                                    THLog(@"%@",responseObject);
-                                }
-                                else
-                                {
-                                    THLog(@"%@",error);
-                                }
-                
-                            }];
+                        }];
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 [defaults setValue:responseObject[@"name"] forKey:@"name"];
                 [defaults setValue:responseObject[@"teacherNo"] forKey:@"teacherNo"];
-//                THLog(@"%@",array);
-//                if (array.count > 0) {
-//                    NSNumber *weekOrdinal = [[array objectAtIndex:0] valueForKey:@"weekOrdinal"];
-//                    THLog(@"week%@",weekOrdinal);
-////                   第一次记入周数
-//                    if (![defaults valueForKey:@"week"]) {
-//                        [defaults setValue:weekOrdinal forKey:@"week"];
-//                    }
-//                    //如果新获取的周数小于保存的周数，即需要更新数据库---删除课表
-//                    if (weekOrdinal < [defaults valueForKey:@"week"]) {
-//                        NSString *sqlstr = [NSString stringWithFormat:@"DELETE FROM allclass"];
-//                        [self.db executeUpdate:sqlstr];
-//                    }
-//                    [self putDataToDatabaseWith:array];
-//                    //记录新的周数
-//                    [defaults setValue:weekOrdinal forKey:@"week"];
-//                    
-//                }
-//             
-//                [self.db  close];
-//            }];
-            
-            
-            
+
+#pragma mark -- 改groupname
+            if([responseObject valueForKey:@"groupName"]){
+            [defaults setValue:responseObject[@"groupName"] forKey:@"groupName"];
+            }
         }else if (status.intValue == 3){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            [MBProgressHUD showMessage:@"正在获取数据当中，请耐性等待" toView:self.view];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"系统信息" message:@"获取成功，请重新登入" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                            [alertView show];
-            });
-     
-//            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"系统信息" message:@"用户不存在或密码不存在" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
-//            [alertView show];
+            
+            //判断是否是第一次登陆，初始化数据
+            if (![[NSUserDefaults standardUserDefaults] valueForKey:@"loginFirst"]) {
+                [[NSUserDefaults standardUserDefaults] setValue:@1 forKey:@"loginFirst"];
+                [MBProgressHUD showMessage:@"正在初始化数据,请耐心等待" toView:self.view];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
+                    
+                    [self login];
+                }
+                               );
+            }else//第一次登陆还未爬成功 提醒再次登陆
+            {
+                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"系统信息" message:@"获取数据失败,请再次重新登入" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"loginFirst"];
+                [alertView show];
+
+            }
+            
+            
+
             
         }else if (status.intValue == 2){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"系统信息" message:@"该用户没有权限访问" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"系统信息" message:@"密码输入有误" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
             [alertView show];
             
-        }else{
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"系统信息" message:@"网络连接错误" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
-            [alertView show];
         }
+//        else{
+//            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"系统信息" message:@"网络连接错误" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+//            [alertView show];
+//        }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         THLog(@"%@",error);
@@ -212,6 +202,10 @@
     }];
 
 }
+
+
+
+
 
 - (void)btnchange{
     self.loginbtn.enabled = (self.username.text.length && self.password.text.length);

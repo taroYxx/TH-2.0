@@ -10,6 +10,8 @@
 #import "THClass.h"
 #import <FMDB/FMDatabase.h>
 #import "THHistoryViewController.h"
+#import "THSegmentScrollViewController.h"
+#import "THSettingTableViewController.h"
 
 @interface THStatisticsViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, weak) UITableView *tableView;
@@ -26,13 +28,27 @@
     self.view.backgroundColor = [UIColor whiteColor];
 //    [self getDataFromDatabase];
  
-    NSMutableArray *mutableArray = [NSMutableArray array];
-    for (NSDictionary *classData in self.classList) {
-        THClass *allclass = [THClass classWithDic:classData];
-        [mutableArray addObject:allclass];
-    }
-    self.tableviewData = mutableArray;
-       [self addView];
+   
+       [self getWeekOrdinal:^(NSArray *array) {
+        self.classList = array;
+        UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:2];
+        THSettingTableViewController  *setting = [nav.viewControllers objectAtIndex:0];
+           NSMutableArray *mutableArray = [NSMutableArray array];
+           for (NSDictionary *classData in self.classList) {
+               THClass *allclass = [THClass classWithDic:classData];
+               [mutableArray addObject:allclass];
+           }
+        setting.classlist = array;
+           self.tableviewData = mutableArray;
+           [self addView];
+
+    }];
+    
+    
+    
+//    UINavigationController *nav1 = [self.tabBarController.viewControllers objectAtIndex:1];
+//    THStatisticsViewController  *statist = [nav1.viewControllers objectAtIndex:0];
+//    statist.classList = array;
 }
 
 
@@ -103,17 +119,46 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    THHistoryViewController *history = [[THHistoryViewController alloc] init];
+//    THHistoryViewController *history = [[THHistoryViewController alloc] init];
     THClass *allclass = self.tableviewData[indexPath.row];
-    history.courseId = allclass.courseId;
-    history.courseName = allclass.courseName;
-    [self.navigationController pushViewController:history animated:YES];
+//    history.courseId = allclass.courseId;
+//    history.courseName = allclass.courseName;
+//    [self.navigationController pushViewController:history animated:YES];
+    THSegmentScrollViewController *nextview = [[THSegmentScrollViewController alloc] init];
+        nextview.courseId = allclass.courseId;
+        nextview.courseName = allclass.courseName;
+    [self.navigationController pushViewController:nextview animated:YES];
     UIBarButtonItem *back = [[UIBarButtonItem alloc] init];
     back.title = @"返回";
     self.navigationItem.backBarButtonItem = back;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
     });
+}
+
+- (void)getWeekOrdinal:(void(^)( NSArray *array))success{
+    NSString *url = [NSString stringWithFormat:@"%@/%@/all_courses/",host,version];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        NSArray *result = responseObject[@"courses"];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            if (success) {
+                success(result);
+            }
+        }];
+        
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        THLog(@"%@",error);
+//        UIWindow *window = [UIApplication sharedApplication].keyWindow;
+//        THLoginViewController *login = [[THLoginViewController alloc] init];
+//        window.rootViewController = login;
+//        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"name"];
+//        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"teacherNo"];
+//        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"groupName"];
+    }];
+    
 }
 
 

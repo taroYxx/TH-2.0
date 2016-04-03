@@ -18,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //       self.view.frame = CGRectMake(0, 0,screenW-100, screenW-10);
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
 }
 
@@ -41,11 +42,12 @@
 {
     static NSString *ID = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
     }
 
-    cell.textLabel.text = [NSString stringWithFormat:@"%@班",self.tableViewData[indexPath.row]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",self.tableViewData[indexPath.row]];
     return cell;
 }
 

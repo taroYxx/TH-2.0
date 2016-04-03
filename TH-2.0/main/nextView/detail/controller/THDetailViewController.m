@@ -36,6 +36,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     NSArray *array = @[[UIImage imageNamed:@"red_status"],[UIImage imageNamed:@"blue_status"],[UIImage imageNamed:@"yellow_status"],[UIImage imageNamed:@"green_status"]];
     self.iconArray = array;
+    self.rightIcon = array[0];
 //    THLog(@"%@",self.weekOrdinal);
 //    [self getDataFromDatabase];
     [self addXYpieChart];

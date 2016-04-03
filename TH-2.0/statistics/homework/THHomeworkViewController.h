@@ -10,5 +10,7 @@
 
 @interface THHomeworkViewController : UIViewController
 @property (nonatomic , strong) NSNumber * courseId;
-
+@property (nonatomic , copy) NSString * courseName;
+@property (nonatomic , strong) NSNumber * weekNumber;
+@property (nonatomic , weak) UITableView * tableView;
 @end

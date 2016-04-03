@@ -142,25 +142,12 @@
                            };
     NSString *url = [NSString stringWithFormat:@"%@/%@/absence_record/",host,version];
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        THLog(@"%@",responseObject[@"status"]);
+        THLog(@"%@",responseObject);
          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         NSNumber *status = responseObject[@"status"];
-        if ([status integerValue] == 1) {
+        if ([status integerValue] == 1 || [status integerValue] == 0) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"提交成功！" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//                NSString *key = [NSString stringWithFormat:@"%@-%@",self.weekOrdinal,self.courseId];
-//                [defaults setValue:@"wrote" forKey:key];
-                //提交到数据库
-//                [self.db open];
-//                for (NSNumber *studentId in absence) {
-//                    [_db executeUpdate:[NSString stringWithFormat:@"UPDATE class_%@ SET absence = 1, leave = 0 WHERE studentId = %@ AND week = %@;",self.courseId,studentId,self.weekOrdinal]];
-//                }
-//                for (NSNumber *student in leave) {
-//                    [_db executeUpdate:[NSString stringWithFormat:@"UPDATE class_%@ SET absence = 0, leave = 1 WHERE studentId = %@ AND week = %@;",self.courseId,student,self.weekOrdinal]];
-//                }
-//                [_db executeUpdate:[NSString stringWithFormat:@"UPDATE class_%@ SET arrive = 1 WHERE absence = 0 and leave = 0 AND week = %@",self.courseId,self.weekOrdinal]];
-//                [self.db close];
                 
                 [self getDetailFromServers:^(NSDictionary *dict) {
                     THDetailViewController *detail = [[THDetailViewController alloc] init];
@@ -192,7 +179,7 @@
             [self presentViewController:alert animated:YES completion:nil];
         }
             else{
-            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"这次点名为空" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"提交失败，请再次提交" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
             [alertView show];
 
         }

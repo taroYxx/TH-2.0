@@ -16,6 +16,7 @@
 @property (nonatomic , strong) NSNumber * teacherNO;
 @property (nonatomic , strong) NSArray * classlist;
 @property (nonatomic , strong) NSArray * noticeData;
+@property (nonatomic , copy) NSString * groupName;
 
 
 @end

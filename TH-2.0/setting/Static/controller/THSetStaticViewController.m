@@ -12,9 +12,10 @@
 #import <XYPieChart/XYPieChart.h>
 #import <FMDB/FMDatabase.h>
 #import "THClassNameListTool.h"
+#import <MJPopupViewController/UIViewController+MJPopupViewController.h>
+#import "THPresentTableViewController.h"
 
-
-@interface THSetStaticViewController ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,XYPieChartDataSource,XYPieChartDelegate>
+@interface THSetStaticViewController ()<UITextFieldDelegate,XYPieChartDataSource,XYPieChartDelegate,THPresentDelegate>
 @property (nonatomic , weak) UISlider * slider;
 @property (nonatomic , weak) UILabel * label;
 @property (nonatomic , strong) UIPickerView * pickview;
@@ -27,6 +28,9 @@
 @property (nonatomic , strong) NSArray * slices;
 @property (nonatomic , strong) NSMutableArray * colorOfSlice;
 @property (nonatomic , strong) NSMutableArray * nameOfSlice;
+@property (nonatomic , weak) UILabel * absenceLabel;
+@property (nonatomic , weak) UITextField * absenceTextField;
+
 
 
 
@@ -65,28 +69,47 @@
     UITextField *textfield =[[UITextField alloc] initWithFrame:CGRectMake(screenW/3+15, 70, screenW-screenW/3-20, 30)];
     textfield.borderStyle = UITextBorderStyleRoundedRect;
     textfield.delegate = self;
-    self.pickview = [[UIPickerView alloc] initWithFrame:CGRectMake(0,screenH-200, screenW, 200)];
-    self.pickview.delegate = self;
-    self.pickview.dataSource = self;
-    self.pickview.backgroundColor = YColor(235, 235, 241, 1);
-    textfield.inputView = self.pickview;
-    UIToolbar *doneToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, screenW, 44)];
-    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(toolbarDone)];
-    done.tintColor = YColor(208, 86, 90, 1);
-    UIBarButtonItem *Flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    doneToolbar.items = @[Flexible,done];
-    textfield.inputAccessoryView = doneToolbar;
+//    self.pickview = [[UIPickerView alloc] initWithFrame:CGRectMake(0,screenH-200, screenW, 200)];
+//    self.pickview.delegate = self;
+//    self.pickview.dataSource = self;
+//    self.pickview.backgroundColor = YColor(235, 235, 241, 1);
+//    textfield.inputView = self.pickview;
+//    UIToolbar *doneToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, screenW, 44)];
+//    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(toolbarDone)];
+//    done.tintColor = YColor(208, 86, 90, 1);
+//    UIBarButtonItem *Flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+//    doneToolbar.items = @[Flexible,done];
+//    textfield.inputAccessoryView = doneToolbar;
     [self.view addSubview:textfield];
     self.textfield = textfield;
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(35, screenH * 3/4, screenW-70, 44)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(35, screenH * 3/4+10, screenW-70, 44)];
     [button setTitle:@"提交" forState:UIControlStateNormal];
     button.backgroundColor = YColor(208, 86, 90, 1);
     [button addTarget:self action:@selector(submit) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     self.button = button;
-    
-//    self.slices = @[@180,@180];
     [self addPiechart];
+    
+    UILabel *absenceLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, screenH/2+40+44+6, 100, 44)];
+    absenceLabel.text = @"缺勤扣除：";
+    absenceLabel.font = [UIFont systemFontOfSize:14];
+    [self.view addSubview:absenceLabel];
+    self.absenceLabel = absenceLabel;
+    
+    UITextField *absenceText = [[UITextField alloc] initWithFrame:CGRectMake(120, screenH/2+40+44+6, 100, 38)];
+    absenceText.borderStyle = UITextBorderStyleRoundedRect;
+    absenceText.keyboardType = UIKeyboardTypeNumberPad;
+    [self.view addSubview:absenceText];
+    self.absenceTextField = absenceText;
+
+    UILabel *tip = [[UILabel alloc] initWithFrame:CGRectMake(120+100+5, screenH/2+40+44+6, 80, 44)];
+    tip.text = @"分/人/次";
+    tip.font = [UIFont systemFontOfSize:14];
+    [self.view addSubview:tip];
+    
+    
+    
+    
     NSMutableArray *mutableArray = [NSMutableArray array];
     NSMutableArray *classId = [NSMutableArray array];
     
@@ -160,19 +183,17 @@
 }
 
 
-- (void)toolbarDone{
-    [self.textfield endEditing:YES];
-}
 
 
 - (void)submit{
-    
+  
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     NSString *url = [NSString stringWithFormat:@"%@/%@/course_homework_per/",host,version];
     //存在百分比没有精确的问题
     NSDictionary *dict = @{
                            @"courseId" : self.subcourseId,
-                           @"homeworkPer" : [NSString stringWithFormat:@"%0.2f",self.slider.value]
+                           @"homeworkPer" : [NSString stringWithFormat:@"%0.2f",self.slider.value],
+                           @"deductPoint" : self.absenceTextField.text
                            };
     
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -200,35 +221,64 @@
   
 
     UISlider *control = (UISlider *)sender;
-
-    
-    
+    if (control.value < 0.04) {
+        [control setValue:0];
+    }else{
+        
+        float a = control.value;
+        float b = (int)(a * 10) / 10.0;
+        float c = (int)(a * 100) / 100.0 - b;
+        float d;
+        if (c > 0.05) {
+            d = b+0.1;
+        }else{
+            d = b+0.05;
+        }
+        [control setValue:d]; }
         float kaoqin = control.value * 360;
         float zuoye = (1-control.value) * 360;
         self.slices = @[[NSNumber numberWithFloat:kaoqin],[NSNumber numberWithFloat:zuoye
-                                                           ]];
+                        ]];
         [self.pieChart reloadData];
 
 }
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    return 1;
-}
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return self.pickViewData.count;
-}
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    return self.pickViewData[row];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    self.textfield.text = self.pickViewData[row];
-    self.subcourseId = self.courseId[row];
+- (void)presentClassView{
+    THPresentTableViewController *present = [[THPresentTableViewController alloc] init];
+    NSMutableArray *mutalArray = [NSMutableArray array];
+    for (NSDictionary *dict in self.classlist) {
+        NSString *courseName = [NSString stringWithFormat:@"%@  %@",dict[@"courseName"],dict[@"courseNo"]];
+        [mutalArray addObject:courseName];
+    }
+    present.tableViewData = mutalArray;
+    present.delegate = self;
+    present.view.frame = CGRectMake(0, 0, screenW-100, screenW-10);
+    [self presentPopupViewController:present animationType:MJPopupViewAnimationFade];
 
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if(textField == self.textfield){
+    [self presentClassView];
+
+        [textField endEditing:YES];
+
+    }
+}
+
+
+
+- (void)PresentsendValue:(NSUInteger)number{
+    
+    NSDictionary *dict = self.classlist[number];
+    self.subcourseId = dict[@"courseId"];
+    THLog(@"%@",self.courseId);
+    self.textfield.text = dict[@"courseName"];
+     THLog(@"%@",self.textfield);
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+}
 
 
 @end

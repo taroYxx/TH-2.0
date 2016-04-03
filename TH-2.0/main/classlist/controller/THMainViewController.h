@@ -10,7 +10,8 @@
 
 @interface THMainViewController : UIViewController
 @property (nonatomic , copy) NSString * cookie;
-@property (nonatomic , assign) NSNumber *weekordinal;
+@property (nonatomic , assign) NSNumber * weekordinal;
+
 
 
 @end

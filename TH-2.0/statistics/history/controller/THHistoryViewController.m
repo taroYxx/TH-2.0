@@ -5,7 +5,7 @@
 //  Created by Taro on 16/3/1.
 //  Copyright © 2016年 Taro. All rights reserved.
 //
-
+#import "THPresentTableViewController.h"
 #import "THHistoryViewController.h"
 #import "THHomeworkViewController.h"
 #import "UITextfield+UIPickView.h"
@@ -13,15 +13,16 @@
 #import "THDetailHistoryViewController.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "MBProgressHUD+YXX.h"
-#import <MJPopupViewController/UIViewController+MJPopupViewController.h>
-#import "THGetWeekTableViewController.h"
+
+
+
 
 @interface THHistoryViewController ()<XYPieChartDataSource,XYPieChartDelegate>
 
 
 @property (nonatomic , strong) UIPickerView * pickview;
 @property (nonatomic , weak) UIButton * button;
-@property (nonatomic , weak) UIButton * rightBtn;
+//@property (nonatomic , weak) UIButton * rightBtn;
 @property (nonatomic , weak) UITextfield_UIPickView *textfield;
 @property (nonatomic , strong) XYPieChart * pieChart;
 @property (nonatomic , strong) NSArray * slices;
@@ -29,42 +30,30 @@
 @property (nonatomic , strong) NSArray * nameOfSlice;
 @property (nonatomic , strong) NSArray * btnArray;
 @property (nonatomic , strong) NSArray * nextViewData;
-@property (nonatomic , weak) UISegmentedControl * segment;
-@property (nonatomic , strong) THHomeworkViewController * homework;
+
+
 
 @end
 
 @implementation THHistoryViewController
 
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.hidesBottomBarWhenPushed = YES;
-        
-    }
-    return self;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [MBProgressHUD showMessage:@"载入中" toView:self.view];
-    self.view.backgroundColor = [UIColor whiteColor];
     [self addTitleView];
-    [self addsegment];
-   
-    UIButton *btn = [[UIButton alloc] init];
-    btn.frame = CGRectMake(0, 0, 70, 30);
-    [btn setTitle:@"第一周" forState:UIControlStateNormal];
-    [btn setTitleColor:YColor(207, 85, 89, 1) forState:UIControlStateNormal];
-    btn.hidden = YES;
-    [btn addTarget:self action:@selector(chooseWeek) forControlEvents:UIControlEventTouchUpInside];
-    self.rightBtn = btn;
-    
-    
-    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    self.navigationItem.rightBarButtonItem = right;
+//    UIButton *btn = [[UIButton alloc] init];
+//    btn.frame = CGRectMake(0, 0, 70, 30);
+//    [btn setTitle:@"第一周" forState:UIControlStateNormal];
+//    [btn setTitleColor:YColor(207, 85, 89, 1) forState:UIControlStateNormal];
+//    btn.hidden = YES;
+//    [btn addTarget:self action:@selector(chooseWeek) forControlEvents:UIControlEventTouchUpInside];
+//    self.rightBtn = btn;
+//    
+//    
+//    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:btn];
+//    self.navigationItem.rightBarButtonItem = right;
     
     [self getDataFromServers:^(NSDictionary *dict) {
         NSInteger absence = [dict[@"absenceProportion"]floatValue]*360;
@@ -81,7 +70,7 @@
         if (weeks.count == 0) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"此课程无任何点名记录" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [self.navigationController popToRootViewControllerAnimated:YES];
+//                [self.navigationController popToRootViewControllerAnimated:YES];
                 
             }];
             [alert addAction:confirm];
@@ -111,50 +100,48 @@
 
 
 
-- (void)addsegment{
-    NSArray *segmentTitle = @[@"考勤统计",@"平时作业"];
-    UISegmentedControl *segment = [[UISegmentedControl alloc] initWithItems:segmentTitle];
-    self.segment = segment;
-    self.segment.frame = CGRectMake(0, 0, 120, 22.2);
-    self.segment.selectedSegmentIndex = 0;
-    self.navigationItem.titleView = _segment;
-    [_segment addTarget:self action:@selector(didSelectSegment:) forControlEvents:UIControlEventValueChanged];
-}
 
-- (void)chooseWeek{
-    THLog(@"choose");
-    
 
-    [self getWeekFromServers:^(NSDictionary *dict) {
+//- (void)chooseWeek{
+//    THPresentTableViewController *week = [[THPresentTableViewController alloc] init];
+//    week.view.frame = CGRectMake(0, 0, screenW-100, screenW-10);
+//    //        present.tableViewData = dict[@"weekList"];
+//    week.tableViewData = @[@"第一周",@"第二周"];
+//    week.delegate = self;
+//    [self presentPopupViewController:week animationType:MJPopupViewAnimationFade];
+
+
+//    [self getWeekFromServers:^(NSDictionary *dict) {
 //        THLog(@"%@",dict);
-        THGetWeekTableViewController *present = [[THGetWeekTableViewController alloc] init];
-        present.view.frame = CGRectMake(0, 0, screenW-100, screenW-10);
-        present.tableViewData = dict[@"weekList"];
-        
-        [self presentPopupViewController:present animationType:MJPopupViewAnimationFade];
-    }];
+//        THGetWeekTableViewController *present = [[THGetWeekTableViewController alloc] init];
+//        present.view.frame = CGRectMake(0, 0, screenW-100, screenW-10);
+////        present.tableViewData = dict[@"weekList"];
+//        present.tableViewData = @[@"第一周",@"第二周"];
+//        
+//        [self presentPopupViewController:present animationType:MJPopupViewAnimationFade];
+//    }];
     
-}
-
-- (void)didSelectSegment:(UISegmentedControl *)sender{
-    sender = _segment;
-    if (sender.selectedSegmentIndex == 0) {
-        self.view.hidden = NO;
-        _homework.view.hidden = YES;
-        self.rightBtn.hidden = YES;
-    }else if(sender.selectedSegmentIndex == 1){
-        if (!_homework)
-        {
-           
-            _homework = [[THHomeworkViewController alloc] init];
-            _homework.courseId = self.courseId;
-            _homework.view.frame = CGRectMake(0, 64+43, screenW, screenH-64-43);
-            [self.view addSubview:_homework.view];
-        }
-         self.rightBtn.hidden = NO;
-        _homework.view.hidden = NO;
-    }
-}
+//}
+//
+//- (void)didSelectSegment:(UISegmentedControl *)sender{
+//    sender = _segment;
+//    if (sender.selectedSegmentIndex == 0) {
+//        self.view.hidden = NO;
+//        _homework.view.hidden = YES;
+//        self.rightBtn.hidden = YES;
+//    }else if(sender.selectedSegmentIndex == 1){
+//        if (!_homework)
+//        {
+//           
+//            _homework = [[THHomeworkViewController alloc] init];
+//            _homework.courseId = self.courseId;
+//            _homework.view.frame = CGRectMake(0, 64+43, screenW, screenH-64-43);
+//            [self.view addSubview:_homework.view];
+//        }
+//         self.rightBtn.hidden = NO;
+//        _homework.view.hidden = NO;
+//    }
+//}
 
 - (void)addTitleView{
     UILabel *titleOfClass = [[UILabel alloc] initWithFrame:CGRectMake(0, 64, screenW, 43)];
@@ -204,7 +191,7 @@
 }
 
 - (void)loadNewView:(void(^)(NSDictionary  * dict))success{
-    THLog(@"1111  %@",self.textfield.subdata);
+//    THLog(@"1111  %@",self.textfield.subdata);
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     NSDictionary *requestData = @{
                                   @"courseId" : self.courseId,
@@ -327,17 +314,22 @@
 
 - (void)btnselect :(id)sender{
     UIButton *button = sender;
-//    THLog(@"%d",button.tag);
-    THDetailHistoryViewController *detail = [[THDetailHistoryViewController alloc] init];
-    detail.nameList = [self.nextViewData objectAtIndex:button.tag];
-    detail.courseName = self.courseName;
-    detail.icontag = button.tag;
-    detail.courseId = self.courseId;
-    [self.navigationController pushViewController:detail animated:YES];
+   
+    NSArray *nameList = [self.nextViewData objectAtIndex:button.tag];
+    NSInteger icontag = button.tag;
+//    THDetailHistoryViewController *detail = [[THDetailHistoryViewController alloc] init];
+//    detail.nameList = [self.nextViewData objectAtIndex:button.tag];
+//    detail.courseName = self.courseName;
+//    detail.icontag = button.tag;
+//    detail.courseId = self.courseId;
+//    
+    [self.delegate PresentsendValue:icontag nameList:nameList];
+
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
     });
-    
+//
     
 }
 
@@ -359,23 +351,23 @@
     }];
 }
 
-- (void)getWeekFromServers:(void(^)(NSDictionary  * dict))success{
-    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
-    NSDictionary *requestData = @{
-                                  @"courseId" : self.courseId,
-                                  };
-    NSString *url = [NSString stringWithFormat:@"%@/%@/homework_weeks/",host,version];
-    [manager POST:url parameters:requestData success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSDictionary *dict = responseObject;
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            if (success) {
-                success(dict);
-            }
-        }];
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        THLog(@"%@",error);
-    }];
-}
+//- (void)getWeekFromServers:(void(^)(NSDictionary  * dict))success{
+//    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+//    NSDictionary *requestData = @{
+//                                  @"courseId" : self.courseId,
+//                                  };
+//    NSString *url = [NSString stringWithFormat:@"%@/%@/homework_weeks/",host,version];
+//    [manager POST:url parameters:requestData success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//        NSDictionary *dict = responseObject;
+//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//            if (success) {
+//                success(dict);
+//            }
+//        }];
+//    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+//        THLog(@"%@",error);
+//    }];
+//}
 
 
 - (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
@@ -395,5 +387,12 @@
     
     return [NSString stringWithFormat:@"%0.1f %%", number.floatValue / 360 * 100];
 }
+
+//- (void)PresentsendValue:(NSUInteger)number{
+//    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+//    THLog(@"%ld",number);
+//    NSArray *array = @[@"第一周",@"第二周"];
+//    [self.rightBtn setTitle:array[number] forState:UIControlStateNormal];
+//}
 
 @end

@@ -50,7 +50,7 @@
     [self.view addSubview:self.topview];
     [MBProgressHUD showMessage:@"加载中" toView:self.view];
     [self getWeekOrdinal:^(NSArray *array) {
-        if (array) {
+        if (array.count>0) {
         //获得周数
             self.weekOrdinal = [array objectAtIndex:0][@"weekOrdinal"];}
    
@@ -102,12 +102,7 @@
        [self addTableviewToScrollView];
        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         
-        UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:2];
-        THSettingTableViewController  *setting = [nav.viewControllers objectAtIndex:0];
-        setting.classlist = array;
-        UINavigationController *nav1 = [self.tabBarController.viewControllers objectAtIndex:1];
-        THStatisticsViewController  *statist = [nav1.viewControllers objectAtIndex:0];
-        statist.classList = array;
+    
     
         
         
@@ -289,6 +284,7 @@
         window.rootViewController = login;
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"name"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"teacherNo"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"groupName"];
     }];
 
 }

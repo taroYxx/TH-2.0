@@ -30,15 +30,17 @@
     THSettingTableViewController *setting = [[THSettingTableViewController alloc] init];
     [self addchildVc:setting title:@"个人设置" image:@"setting" selectedImage:@"setting_select" badgeValue:nil];
     
-    [self GetMessage:^(NSArray *array) {
-//        THLog(@"data%@",array);
-        
-        setting.noticeData = array;
-        if (array.count != 0) {
-            setting.tabBarItem.badgeValue  = [NSString stringWithFormat:@"%ld",array.count];
-        }
-        
-    }];
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"辅导员"] || [[NSUserDefaults standardUserDefaults] valueForKey:@"教务处"] ) {
+        [self GetMessage:^(NSArray *array) {
+            setting.noticeData = array;
+            if (array.count != 0) {
+                setting.tabBarItem.badgeValue  = [NSString stringWithFormat:@"%ld",array.count];
+            }
+            
+        }];
+    }
+    
+   
 }
 
 - (void)addchildVc:(UIViewController *)childVc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectImage badgeValue:(NSString *)badgeValue{
