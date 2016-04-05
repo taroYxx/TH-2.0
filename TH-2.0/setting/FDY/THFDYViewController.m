@@ -13,6 +13,7 @@
 #import "THPresentTableViewController.h"
 #import "THMessage.h"
 #import "THRecord.h"
+#import <MJRefresh/MJRefresh.h>
 @interface THFDYViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UITextFieldDelegate,THNamelistControllerDelegate,THPresentDelegate>
 
 @property (nonatomic , weak) UICollectionView * collection;
@@ -46,8 +47,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
        self.automaticallyAdjustsScrollViewInsets = NO;
-  
-
+     
+    
    
     
 //    UIButton *btn = [[UIButton alloc] init];

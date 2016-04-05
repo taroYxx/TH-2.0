@@ -134,7 +134,12 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
     });
+   
+    
+
 }
+
+
 
 - (void)getWeekOrdinal:(void(^)( NSArray *array))success{
     NSString *url = [NSString stringWithFormat:@"%@/%@/all_courses/",host,version];

@@ -121,8 +121,8 @@
 //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     NSString *urlStr = [NSString stringWithFormat:@"%@/%@/teacher_login/",host,version];
     [manager POST:urlStr parameters:bodyParameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        THLog(@"%@",responseObject);
-        THLog(@"%@",[operation.response allHeaderFields][@"set-Cookie"]);
+//        THLog(@"%@",responseObject);
+//        THLog(@"%@",[operation.response allHeaderFields][@"set-Cookie"]);
         NSNumber *status = responseObject[@"status"];
 //        NSNumber *status = @3;
        
@@ -163,7 +163,7 @@
             if (![[NSUserDefaults standardUserDefaults] valueForKey:@"loginFirst"]) {
                 [[NSUserDefaults standardUserDefaults] setValue:@1 forKey:@"loginFirst"];
                 [MBProgressHUD showMessage:@"正在初始化数据,请耐心等待" toView:self.view];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     
                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
@@ -187,7 +187,12 @@
             UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"系统信息" message:@"密码输入有误" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
             [alertView show];
             
+        }else{
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"系统信息" message:@"数字校园账号密码有误" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [alertView show];
         }
+        
 //        else{
 //            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 //            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"系统信息" message:@"网络连接错误" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];

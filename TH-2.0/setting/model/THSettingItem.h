@@ -12,7 +12,8 @@
 @interface THSettingItem : NSObject
 
 @property (nonatomic , strong) NSString * title;
-@property (nonatomic , strong) UIViewController * nextController;
+//@property (nonatomic , strong) UIViewController * nextController;
+//@property (nonatomic , assign) NSInteger controllerId;
 @property (nonatomic , strong) UIImage * iconImage;
 @property (nonatomic , strong) UILabel * label;
 

@@ -10,6 +10,7 @@
 #import <FMDB/FMDatabase.h>
 #import <XYPieChart/XYPieChart.h>
 #import "THdetailStudent.h"
+#import <MJRefresh/MJRefresh.h>
 
 
 @interface THDetailViewController ()<XYPieChartDataSource,XYPieChartDelegate,UITableViewDataSource,UITableViewDelegate>
@@ -17,12 +18,14 @@
 @property (nonatomic , strong) FMDatabase * db;
 @property (nonatomic , strong) XYPieChart * pieChart;
 @property (nonatomic , weak) UITableView * tableView;
-
 @property (nonatomic , strong) NSMutableArray * colorOfSlice;
 @property (nonatomic , strong) NSMutableArray * nameOfSlice;
 @property (nonatomic , strong) NSArray * iconArray;
 @property (nonatomic , strong) UIImage * rightIcon;
 @property (nonatomic , strong) NSNumber * studentId;
+@property (nonatomic , strong) NSArray * labelArray;
+
+
 
 
 
@@ -40,10 +43,46 @@
 //    THLog(@"%@",self.weekOrdinal);
 //    [self getDataFromDatabase];
     [self addXYpieChart];
+    UILabel *lab1 = [[UILabel alloc] init];
+    UILabel *lab2 = [[UILabel alloc] init];
+    UILabel *lab3 = [[UILabel alloc] init];
+    UILabel *lab4 = [[UILabel alloc] init];
+    self.labelArray = @[lab1,lab2,lab3,lab4];
     [self addButton];
+
     [self addTableView];
+       self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self loadNewData];
+    }];
+    [self.tableView.mj_header beginRefreshing];
+}
 
 
+- (void)loadNewData{
+    [self getWeekhistoryFromServers:^(NSDictionary *dict) {
+        NSDictionary *dictionary = dict[@"history"];
+        NSArray *absenceModel = [self dictionaryToModelWithArray:dictionary[@"absence"]];
+        NSArray *leaveModel = [self dictionaryToModelWithArray:dictionary[@"leave"]];
+        NSArray *laterModel = [self dictionaryToModelWithArray:dictionary[@"late"]];
+        NSArray *appearModel = [self dictionaryToModelWithArray:dictionary[@"appear"]];
+        NSArray *tableViewData = @[absenceModel,leaveModel,laterModel,appearModel];
+        NSNumber *absence = [self numberMutipilay:dict[@"absenceProportion"]];
+        NSNumber *leave = [self numberMutipilay:dict[@"leaveProportion"]];
+        NSNumber *late = [self numberMutipilay:dict[@"lateProportion"]];
+        NSNumber *appear = [self numberMutipilay:dict[@"appearProportion"]];
+        self.slices = @[absence,leave,late,appear];
+        self.totalModel = tableViewData;
+        self.tableviewData = [self.totalModel objectAtIndex:0];
+        [self.tableView reloadData];
+        [self.pieChart reloadData];
+        for (int i = 0; i < 4; i++) {
+            NSArray *ary = [self.totalModel objectAtIndex:i];
+            UILabel *label = [self.labelArray objectAtIndex:i];
+            label.text = [NSString stringWithFormat:@"%ld",ary.count];
+        }
+        
+        [self.tableView.mj_header endRefreshing];
+    }];
 
 }
 
@@ -57,10 +96,6 @@
     [titleOfClass setTextAlignment:NSTextAlignmentCenter];
     titleOfClass.backgroundColor = YColor(228, 228, 228, 1);
     [self.view addSubview:titleOfClass];
-    
-
-
-    
     self.pieChart = [[XYPieChart alloc] init];
     self.pieChart.delegate = self;
     self.pieChart.dataSource = self;
@@ -142,14 +177,14 @@
         UIImageView *imageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:bgViewName[i]]];
         imageview.frame = CGRectMake(screenW/4 * 2/3+5, 13, 20, 20);
         [button addSubview:imageview];
-        UILabel *lable = [[UILabel alloc] init];
+        UILabel *lable = [self.labelArray objectAtIndex:i];
         lable.frame = CGRectMake(screenW/4 * 2/3, 0, screenW/4 * 1/3, 44);
-        NSArray *ary = [self.totalModel objectAtIndex:i];
-        lable.text = [NSString stringWithFormat:@"%lu",(unsigned long)ary.count];
         lable.font = [UIFont systemFontOfSize:12.0];
         lable.textAlignment = NSTextAlignmentCenter;
         lable.textColor = [UIColor whiteColor];
         [button addSubview:lable];
+        
+   
     }
     for (int i = 1; i < 4; i++) {
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(screenW/4*i,screenH/2+5, 2, 40)];
@@ -158,6 +193,8 @@
     }
     
 }
+
+
 
 - (void)transitTableView:(UIButton *)btn{
     self.tableviewData = [self.totalModel objectAtIndex:btn.tag];
@@ -293,6 +330,38 @@
 
 }
 
+- (void)getWeekhistoryFromServers:(void(^)(NSDictionary  * dict))success{
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    NSDictionary *requestData = @{
+                                  @"courseId" : self.courseId,
+                                  @"weekNumber" : self.weekOrdinal
+                                  };
+    NSString *url = [NSString stringWithFormat:@"%@/%@/weekhistory/",host,version];
+    [manager POST:url parameters:requestData success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSDictionary *dict = responseObject;
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            if (success) {
+                success(dict);
+            }
+        }];
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        THLog(@"%@",error);
+    }];
+}
 
+- (NSArray *)dictionaryToModelWithArray :(NSArray *)array{
+    NSMutableArray *model = [NSMutableArray array];
+    for (NSDictionary *state in array) {
+        THdetailStudent *detail = [THdetailStudent detailWithDic:state];
+        [model addObject:detail];
+    }
+    return model;
+    
+}
+
+- (NSNumber *)numberMutipilay :(NSNumber *)number{
+    NSNumber *result = [NSNumber numberWithFloat:number.floatValue * 360];
+    return result;
+}
 
 @end

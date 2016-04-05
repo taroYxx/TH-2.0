@@ -531,7 +531,7 @@
 			path = UMessage_Sdk_1.2.6;
 			sourceTree = "<group>";
 		};
-		50C89D511C9AE1D0009D1836 /* FDY */ = {
+		50C89D511C9AE1D0009D1836 /* FDY(滑动有bug) */ = {
 			isa = PBXGroup;
 			children = (
 				503990DC1CA40EE200D45F2A /* presentView */,
@@ -540,6 +540,7 @@
 				50C89D521C9AE1E6009D1836 /* THFDYViewController.h */,
 				50C89D531C9AE1E6009D1836 /* THFDYViewController.m */,
 			);
+			name = "FDY(滑动有bug)";
 			path = FDY;
 			sourceTree = "<group>";
 		};
@@ -612,7 +613,7 @@
 		50DE4D701C7EE32900AD006C /* setting */ = {
 			isa = PBXGroup;
 			children = (
-				50C89D511C9AE1D0009D1836 /* FDY */,
+				50C89D511C9AE1D0009D1836 /* FDY(滑动有bug) */,
 				5029EAC31C94FFB700291FF9 /* setting */,
 				50DE4D711C7EE32900AD006C /* model */,
 				50DE4D761C7EE32900AD006C /* notice */,

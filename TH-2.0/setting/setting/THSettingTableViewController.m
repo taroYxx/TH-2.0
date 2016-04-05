@@ -19,6 +19,8 @@
 
 @interface THSettingTableViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic , strong) NSMutableArray * groups;
+@property (nonatomic , assign) NSInteger teacherState;
+
 
 
 @end
@@ -81,19 +83,18 @@
 
 - (void)setGroup2{
   
-
     THSettingGroup *group = [[THSettingGroup alloc] init];
     group.headerTitle = @"功能设置";
-    
     THSettingItem *item1 = [THSettingItem itemWithTitle:@"开通子账号"];
+    
     THSettingItem *item2 = [THSettingItem itemWithTitle:@"设置统计百分比"];
+//    THSetStaticViewController *statice = [[THSetStaticViewController alloc] init];
+//    statice.classlist = self.classlist;
+    
+    
+    item1.iconImage = [UIImage imageNamed:@"assistant"];
+    item2.iconImage = [UIImage imageNamed:@"per"];
 
-//    item.nextController = [[THSetNoticeViewController alloc] init];
-//    THSetNoticeViewController *notice = [[THSetNoticeViewController alloc] init];
-//    item.nextController = notice;
-    
-//    notice.noticeData = self.noticeData;
-    
     
     UILabel *label = [[UILabel alloc] init];
     label.backgroundColor = [UIColor redColor];
@@ -106,20 +107,11 @@
     [label setTextColor:[UIColor whiteColor]];
     
     
-//    [cell addSubview:label];
-    THSetStaticViewController *statice = [[THSetStaticViewController alloc] init];
-    statice.classlist = self.classlist;
-    item2.nextController = statice;
     
-    THSetSubAccountViewController *setSubAccount = [[THSetSubAccountViewController alloc] init];
-    item1.nextController = setSubAccount;
-
-    item1.iconImage = [UIImage imageNamed:@"assistant"];
-    item2.iconImage = [UIImage imageNamed:@"per"];
-    
-    // 辅导员
+    // 辅导员 tag = 3
     self.groupName = [[NSUserDefaults standardUserDefaults] valueForKey:@"groupName"];
     if ([self.groupName isEqualToString:@"辅导员"]) {
+        self.teacherState = 3;
         THSettingItem *item = [THSettingItem itemWithTitle:@"消息通知"];
         if (self.noticeData.count != 0) {
             item.label = label;
@@ -127,27 +119,25 @@
         item.iconImage = [UIImage imageNamed:@"msg"];
         THSettingItem *item3 = [THSettingItem itemWithTitle:@"辅导员选项"];
         item3.iconImage = [UIImage imageNamed:@"eye"];
-        item.nextController = [[THSetNoticeViewController alloc] init];
-        item3.nextController = [[THFDYViewController alloc] init];
-        
-          group.items = @[item,item1,item2,item3];
-    }else if([self.groupName isEqualToString:@"教务处"]){
+        group.items = @[item,item1,item2,item3];
+    }
+    //教务处 tag =2
+    else if([self.groupName isEqualToString:@"教务处"]){
+        self.teacherState = 2;
         THSettingItem *item = [THSettingItem itemWithTitle:@"消息通知"];
         if (self.noticeData.count != 0) {
             item.label = label;
         }
         item.iconImage = [UIImage imageNamed:@"msg"];
-        item.nextController = [[THSetNoticeViewController alloc] init];
-            group.items = @[item,item1,item2];
-    }else{
+        group.items = @[item,item1,item2];
+    }
+    //老师 tag = 1
+    else{
+        self.teacherState = 1;
         group.items = @[item1,item2];
 
     }
     
-    
-//    THFDYViewController *fdy = [[THFDYViewController alloc] init];
-//    item3.nextController = fdy;
-  
     [self.groups addObject:group];
     
 
@@ -196,36 +186,79 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    THSettingGroup *group = self.groups[indexPath.section];
-    THSettingItem *item = group.items[indexPath.row];
-    
-    if(item.nextController){
-        [self.navigationController pushViewController:item.nextController animated:YES];
-    }
-//    if (indexPath.section == 1) {
-//        switch (indexPath.row) {
-//            case 0:{
-//                THSetNoticeViewController *notice = [[THSetNoticeViewController alloc] init];
-//                [self.navigationController pushViewController:notice animated:YES];
-//                break;
-//            }
-//            case 1:{
-//                THSetSubAccountViewController *setSubAccount = [[THSetSubAccountViewController alloc] init];
-//                [self.navigationController pushViewController:setSubAccount animated:YES];
-//                break;
-//            }
-//            case 2:{
-//                THSetStaticViewController *statice = [[THSetStaticViewController alloc] init];
-//                statice.classlist = self.classlist;
-//                [self.navigationController pushViewController:statice animated:YES];
-//                break;
-//            }
-//            case 3:{
-//                THFDYViewController *fdy = [[THFDYViewController alloc] init];
-//                [self.navigationController pushViewController:fdy animated:YES];
-//            }
-//        }
+//    THSettingGroup *group = self.groups[indexPath.section];
+//    THSettingItem *item = group.items[indexPath.row];
+//    
+//    if(item.controllerId){
+//        [self.navigationController pushViewController:self.allControllers[item.controllerId] animated:YES];
 //    }
+    
+    
+    if (indexPath.section == 1) {
+        if (self.teacherState == 3) {
+            switch (indexPath.row) {
+                case 0:{
+                    THSetNoticeViewController *notice = [[THSetNoticeViewController alloc] init];
+                    [self.navigationController pushViewController:notice animated:YES];
+                    break;
+                }
+                case 1:{
+                    THSetSubAccountViewController *setSubAccount = [[THSetSubAccountViewController alloc] init];
+                    [self.navigationController pushViewController:setSubAccount animated:YES];
+                    break;
+                }
+                case 2:{
+                    THSetStaticViewController *statice = [[THSetStaticViewController alloc] init];
+                    statice.classlist = self.classlist;
+                    [self.navigationController pushViewController:statice animated:YES];
+                    break;
+                }
+                case 3:{
+                    THFDYViewController *fdy = [[THFDYViewController alloc] init];
+                    [self.navigationController pushViewController:fdy animated:YES];
+                }
+            }
+        }else if (self.teacherState == 2){
+            switch (indexPath.row) {
+                case 0:{
+                    THSetNoticeViewController *notice = [[THSetNoticeViewController alloc] init];
+                    [self.navigationController pushViewController:notice animated:YES];
+                    break;
+                }
+                case 1:{
+                    THSetSubAccountViewController *setSubAccount = [[THSetSubAccountViewController alloc] init];
+                    [self.navigationController pushViewController:setSubAccount animated:YES];
+                    break;
+                }
+                case 2:{
+                    THSetStaticViewController *statice = [[THSetStaticViewController alloc] init];
+                    statice.classlist = self.classlist;
+                    [self.navigationController pushViewController:statice animated:YES];
+                    break;
+                }
+            }
+
+        }else{
+            switch (indexPath.row) {
+        
+                case 0:{
+                    THSetSubAccountViewController *setSubAccount = [[THSetSubAccountViewController alloc] init];
+                    [self.navigationController pushViewController:setSubAccount animated:YES];
+                    break;
+                }
+                case 1:{
+                    THSetStaticViewController *statice = [[THSetStaticViewController alloc] init];
+                    statice.classlist = self.classlist;
+                    [self.navigationController pushViewController:statice animated:YES];
+                    break;
+                }
+           
+            }
+
+            
+        }
+       
+    }
     
     
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
