@@ -186,7 +186,7 @@
 
 
 - (void)submit{
-  
+    if(self.subcourseId && self.slider.value && self.absenceTextField.text){
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     NSString *url = [NSString stringWithFormat:@"%@/%@/course_homework_per/",host,version];
     //存在百分比没有精确的问题
@@ -213,6 +213,10 @@
         UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"系统信息" message:@"网络连接有问题" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
         [alertView show];
     }];
+    }else {
+        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"系统信息" message:@"请完善所有信息再提交！" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+        [alertView show];
+    }
 
     
 }
@@ -248,14 +252,18 @@
 - (void)presentClassView{
     THPresentTableViewController *present = [[THPresentTableViewController alloc] init];
     NSMutableArray *mutalArray = [NSMutableArray array];
-    for (NSDictionary *dict in self.classlist) {
-        NSString *courseName = [NSString stringWithFormat:@"%@  %@",dict[@"courseName"],dict[@"courseNo"]];
-        [mutalArray addObject:courseName];
-    }
-    present.tableViewData = mutalArray;
-    present.delegate = self;
-    present.view.frame = CGRectMake(0, 0, screenW-100, screenW-10);
-    [self presentPopupViewController:present animationType:MJPopupViewAnimationFade];
+    [self getWeekOrdinal:^(NSArray *array) {
+        self.classlist = array;
+        for (NSDictionary *dict in array) {
+            NSString *courseName = [NSString stringWithFormat:@"%@  %@",dict[@"courseName"],dict[@"courseNo"]];
+            [mutalArray addObject:courseName];
+        }
+        present.tableViewData = mutalArray;
+        present.delegate = self;
+        present.view.frame = CGRectMake(0, 0, screenW-100, screenW-10);
+        [self presentPopupViewController:present animationType:MJPopupViewAnimationFade];
+    }];
+   
 
 }
 
@@ -280,5 +288,29 @@
     [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
 }
 
+- (void)getWeekOrdinal:(void(^)( NSArray *array))success{
+    NSString *url = [NSString stringWithFormat:@"%@/%@/all_courses/",host,version];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        NSArray *result = responseObject[@"courses"];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            if (success) {
+                success(result);
+            }
+        }];
+        
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        THLog(@"%@",error);
+        //        UIWindow *window = [UIApplication sharedApplication].keyWindow;
+        //        THLoginViewController *login = [[THLoginViewController alloc] init];
+        //        window.rootViewController = login;
+        //        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"name"];
+        //        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"teacherNo"];
+        //        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"groupName"];
+    }];
+    
+}
 
 @end

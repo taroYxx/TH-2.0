@@ -31,14 +31,14 @@
    
        [self getWeekOrdinal:^(NSArray *array) {
         self.classList = array;
-        UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:2];
-        THSettingTableViewController  *setting = [nav.viewControllers objectAtIndex:0];
+//        UINavigationController *nav = [self.tabBarController.viewControllers objectAtIndex:2];
+//        THSettingTableViewController  *setting = [nav.viewControllers objectAtIndex:0];
            NSMutableArray *mutableArray = [NSMutableArray array];
            for (NSDictionary *classData in self.classList) {
                THClass *allclass = [THClass classWithDic:classData];
                [mutableArray addObject:allclass];
            }
-        setting.classlist = array;
+//        setting.classlist = array;
            self.tableviewData = mutableArray;
            [self addView];
 
