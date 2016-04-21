@@ -238,6 +238,9 @@
         }else {
             array = self.normalModel;
         }
+        
+                
+        
         THStudent *student = array[indexPath.row];
         cell.textLabel.text = student.name;
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",student.studentNo];

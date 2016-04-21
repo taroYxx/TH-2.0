@@ -58,7 +58,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
   
     THLog(@"%ld",self.tableViewData.count);
-    return self.tableViewData.count;
+    return self.tableViewCount;
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -71,12 +71,15 @@
         UILabel *courseName = [[UILabel alloc] init];
         courseName.font = [UIFont systemFontOfSize:19];
         courseName.frame = CGRectMake(10, 5, screenW-40+5, 30);
-        //    courseName.backgroundColor = [UIColor orangeColor];
+//        courseName.adjustsFontSizeToFitWidth = YES;
+//        courseName.textAlignment = NSTextAlignmentCenter;
+        self.courseName = courseName;
         
         UILabel *teacherName = [[UILabel alloc] init];
         teacherName.frame = CGRectMake(150, 40, 100, 30);
         self.teacherName = teacherName;
-        //    teacherName.backgroundColor = [UIColor orangeColor];
+        
+//            teacherName.backgroundColor = [UIColor orangeColor];
         
         UILabel *courseNo = [[UILabel alloc] init];
         courseNo.frame = CGRectMake(10, 40, 100, 30);
@@ -87,14 +90,15 @@
         //    time.backgroundColor = [UIColor orangeColor];
         time.adjustsFontSizeToFitWidth = YES;
         self.time = time;
-        [cell addSubview:teacherName];
-        [cell addSubview:courseName];
-        [cell addSubview:time];
+        [cell.contentView addSubview:teacherName];
+        [cell.contentView addSubview:courseName];
+        [cell.contentView addSubview:time];
 //        [cell addSubview:courseNo];
         
     }
     THRecord *recode = self.tableViewData[indexPath.row];
     self.courseName.text = recode.courseName;
+    
     self.teacherName.text = recode.courseTeacher;
 //    courseNo.text = recode.courseNo;
     NSRange range = NSMakeRange(0,10);

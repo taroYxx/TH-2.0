@@ -249,6 +249,7 @@
        cell.studentNo.label.text = student.studentNo;
        cell.major.label.text = student.major;
        cell.tableViewData = student.records;
+    cell.tableViewCount = student.records.count;
 
   
 //        UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(40, 20, screenW-80, 40)];

@@ -15,7 +15,7 @@
         self.pickdata = pickdata;
         self.subdataArray = subdataArray;
         self.borderStyle = UITextBorderStyleRoundedRect;
-        UIPickerView *pickview = [[UIPickerView alloc] initWithFrame:self.frame];
+        UIPickerView *pickview = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, screenW, 150)];
         pickview.delegate = self;
         pickview.dataSource = self;
         pickview.backgroundColor = YColor(235, 235, 241, 1);
@@ -28,6 +28,8 @@
         doneToolbar.items = @[Flexible,done];
         self.inputAccessoryView = doneToolbar;
         self.delegate = self;
+        self.text = self.pickdata[0];
+        
         
     }
     return self;
@@ -37,9 +39,10 @@
     THLog(@"%@",self.subdata);
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
-    self.text = self.pickdata[0];
-}
+//- (void)textFieldDidBeginEditing:(UITextField *)textField{
+//    self.text = self.pickdata[0];
+//    
+//}
 
 
 

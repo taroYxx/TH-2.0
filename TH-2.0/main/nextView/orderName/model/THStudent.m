@@ -19,6 +19,7 @@
         self.studentNo = dic[@"studentNo"];
         self.studentId = dic[@"studentId"];
         self.lateTimesAtThisClass = dic[@"lateTimesAtThisClass"];
+        self.state = dic[@"state"];
        
         //        [self setValuesForKeysWithDictionary: dic];
     }

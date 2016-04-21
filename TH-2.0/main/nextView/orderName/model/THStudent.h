@@ -16,6 +16,8 @@
 @property (nonatomic , strong) NSString * name;
 @property (nonatomic , strong) NSNumber * studentNo;
 @property (nonatomic , strong) NSNumber * studentId;
+@property (nonatomic , strong) NSNumber * state;
+
 
 
 - (instancetype)initWithDic:(NSDictionary *)dic;

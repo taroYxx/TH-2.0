@@ -37,7 +37,8 @@
     NSMutableSet *arriveSet = [NSMutableSet set];
     NSMutableSet *leaveSet = [NSMutableSet set];
     NSMutableSet *laterSet = [NSMutableSet set];
-    self.subData = @[arriveSet,leaveSet,laterSet];
+    NSMutableSet *absenceSet = [NSMutableSet set];
+    self.subData = @[arriveSet,leaveSet,laterSet,absenceSet];
     [self.tableView.mj_header beginRefreshing];
     [self addTitleView];
     [self addtableView];
@@ -87,16 +88,56 @@
 - (void)loadNewData{
     [self getDataFromServers:^(NSMutableArray *array) {
         
-        NSMutableArray *mutableArray = [NSMutableArray array];
-        for (NSDictionary *dict in array) {
-            THStudent *student = [[THStudent alloc] initWithDic:dict];
-            [mutableArray addObject:student];
-        }
-        self.tableViewData = mutableArray;
+//        NSMutableArray *mutableArray = [NSMutableArray array];
+//        for (NSDictionary *dict in array) {
+//            THStudent *student = [[THStudent alloc] initWithDic:dict];
+//            [mutableArray addObject:student];
+//        }
+        self.tableViewData = [self tableDataToRangWith:array];
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
     }];
 }
+
+- (NSArray *)tableDataToRangWith: (NSArray *)array{
+    NSArray *mutableArray = [NSArray array];
+    NSMutableArray *absence = [NSMutableArray array];
+    NSMutableArray *leave = [NSMutableArray array];
+    NSMutableArray *late = [NSMutableArray array];
+    for (NSDictionary *dict in array) {
+        THStudent *student = [[THStudent alloc] initWithDic:dict];
+        switch ([student.state integerValue]) {
+            case 0:
+                [absence addObject:student];
+                break;
+            case 1:
+                [leave addObject:student];
+                break;
+            case 2:
+                [late addObject:student];
+                break;
+                
+            default:
+                break;
+        }
+    }
+//   mutableArray = @[absence,leave,late];
+    mutableArray = [absence arrayByAddingObjectsFromArray:absence];
+    mutableArray = [mutableArray arrayByAddingObjectsFromArray:leave];
+    mutableArray = [mutableArray arrayByAddingObjectsFromArray:late];
+//    NSMutableArray *result = [NSMutableArray array];
+//    for (NSArray *subarray in mutableArray) {
+//        for (THStudent *perST in subarray) {
+//            [result addObject:perST];
+//        }
+//    }
+    
+   
+    
+    return mutableArray;
+}
+
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.tableViewData.count;
@@ -114,7 +155,14 @@
     THStudent *student = self.tableViewData[indexPath.row];
     cell.textLabel.text = student.name;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",student.studentNo];
-    cell.imageView.image = [UIImage imageNamed:@"red_status"];
+    if ([student.state integerValue]== 0) {
+        cell.imageView.image = [UIImage imageNamed:@"red_status"];
+    }else if ([student.state integerValue] == 1){
+        cell.imageView.image = [UIImage imageNamed:@"blue_status"];
+    }else{
+        cell.imageView.image = [UIImage imageNamed:@"yellow_status"];
+    }
+    
     cell.imageView.frame = CGRectMake(0, 0, screenW - cell.imageView.image.size.width, cell.imageView.image.size.height);
     return cell;
 }
@@ -122,6 +170,21 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     
 }
+
+
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//    cell.backgroundColor = [UIColor whiteColor];
+//     THStudent *student = self.tableViewData[indexPath.row];
+//    if ([student.state integerValue]== 0) {
+//        cell.imageView.image = [UIImage imageNamed:@"red_status"];
+//    }else if ([student.state integerValue] == 1){
+//        cell.imageView.image = [UIImage imageNamed:@"blue_status"];
+//    }else{
+//        cell.imageView.image = [UIImage imageNamed:@"yellow_status"];
+//    }
+//
+//}
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -132,6 +195,8 @@
         [self.subData[0] addObject:student.studentId];
         [self.subData[1] removeObject:student.studentId];
         [self.subData[2] removeObject:student.studentId];
+        [self.subData[3] removeObject:student.studentId];
+        
     }];
     arrive.backgroundColor = YColor(79, 220, 101, 1);
     UITableViewRowAction *leave = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"请假" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
@@ -140,6 +205,8 @@
         [self.subData[0] removeObject:student.studentId];
         [self.subData[1] addObject:student.studentId];
         [self.subData[2] removeObject:student.studentId];
+        [self.subData[3] removeObject:student.studentId];
+       
     }];
     leave.backgroundColor = YColor(58, 185, 218, 1);
     UITableViewRowAction *later = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"迟到" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
@@ -148,6 +215,8 @@
         [self.subData[0] removeObject:student.studentId];
         [self.subData[1] removeObject:student.studentId];
         [self.subData[2] addObject:student.studentId];
+        [self.subData[3] removeObject:student.studentId];
+        
     }];
     later.backgroundColor = YColor(254, 204, 43, 1);
     UITableViewRowAction *cancel = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"缺席" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
@@ -156,8 +225,11 @@
         [self.subData[0] removeObject:student.studentId];
         [self.subData[1] removeObject:student.studentId];
         [self.subData[2] removeObject:student.studentId];
+        [self.subData[3] addObject:student.studentId];
     }];
     cancel.backgroundColor = YColor(207, 85, 89, 1);
+//    cell.backgroundColor = YColor(228, 228, 228, 1);
+    
     return @[cancel,later,leave,arrive];
 }
 

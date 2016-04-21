@@ -62,7 +62,7 @@
         [self setlabelBorderColor:state];
         [self setlabelBorderColor:record];
         
-        record.numberOfLines = 6;
+        record.numberOfLines = 0;
 //        NSString *str = @"xxxxxxxx";
 //        label.text = str;
 //        CGSize size = [self sizeThatFits:CGSizeMake(record.frame.size.height, MAXFLOAT)];

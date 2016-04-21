@@ -108,7 +108,7 @@
     
     
     [self.segment setTitle:@"点名" forSegmentAtIndex:0];
-    [self.segment setTitle:@"补签" forSegmentAtIndex:1];
+    [self.segment setTitle:@"修改详情" forSegmentAtIndex:1];
     THOrderNameViewController *orderName = [[THOrderNameViewController alloc] init];
     orderName.courseId = self.courseId;
     orderName.Navtitle = self.Navtitle;

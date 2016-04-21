@@ -23,4 +23,5 @@
 @property (nonatomic , weak) UILabel * teacherName;
 @property (nonatomic , weak) UILabel * courseNo;
 @property (nonatomic , weak) UILabel * time;
+@property (nonatomic , assign) NSInteger tableViewCount;
 @end

@@ -56,17 +56,31 @@
 //    self.navigationItem.rightBarButtonItem = right;
     
     [self getDataFromServers:^(NSDictionary *dict) {
-        NSInteger absence = [dict[@"absenceProportion"]floatValue]*360;
-        NSInteger leave = [dict[@"leaveProportion"]floatValue]*360;
-        NSInteger later = [dict[@"lateProportion"]floatValue]*360;
-        NSInteger appear = [dict[@"appearProportion"]floatValue]*360;
-        self.slices = @[[NSNumber numberWithInteger:absence],[NSNumber numberWithInteger:leave],[NSNumber numberWithInteger:later],[NSNumber numberWithInteger:appear]];
+//        NSInteger absence = [dict[@"absenceProportion"]floatValue]*360;
+//        NSInteger leave = [dict[@"leaveProportion"]floatValue]*360;
+//        NSInteger later = [dict[@"lateProportion"]floatValue]*360;
+//        NSInteger appear = [dict[@"appearProportion"]floatValue]*360;
+//        self.slices = @[[NSNumber numberWithInteger:absence],[NSNumber numberWithInteger:leave],[NSNumber numberWithInteger:later],[NSNumber numberWithInteger:appear]];
         NSArray *weeks = dict[@"weeks"];
+        weeks = [weeks sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            if ([obj1 integerValue] > [obj2 integerValue]) {
+                return NSOrderedAscending;
+            }
+            if ([obj1 integerValue] < [obj2 integerValue]) {
+                return NSOrderedDescending;
+            }
+            return NSOrderedSame;
+        }];
+        NSMutableArray *mutarray = [NSMutableArray arrayWithArray:weeks];
+        [mutarray insertObject:@"全部" atIndex:0];
+        
+        
         NSMutableArray *array = [NSMutableArray array];
         for (int i = 0; i < weeks.count; i++) {
             NSString *zhou = [NSString stringWithFormat:@"第%@周",weeks[i]];
             [array addObject:zhou];
         }
+        [array insertObject:@"全部" atIndex:0];
         if (weeks.count == 0) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"此课程无任何点名记录" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -77,9 +91,9 @@
             [self presentViewController:alert animated:YES completion:nil];
         }
         else{
-        UITextfield_UIPickView *textfield = [[UITextfield_UIPickView alloc] initWithFrame:CGRectMake(10, 143, screenW*2/3, 44) :array :weeks ];
+        UITextfield_UIPickView *textfield = [[UITextfield_UIPickView alloc] initWithFrame:CGRectMake(10, 143, screenW*2/3, 44) :array :mutarray ];
         self.textfield = textfield;
-        self.textfield.subdata = weeks[0];
+        self.textfield.subdata = mutarray[0];
         [self.view addSubview:textfield];
         [self addsomeView];
         [self addPiechartView];
@@ -88,17 +102,28 @@
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
+    [self showTotalDataFromServe];
+    
+}
+
+- (void)showTotalDataFromServe{
     [self totalDataFromServe:^(NSDictionary *dictionary) {
+        THLog(@"%@",dictionary);
+        NSInteger absence = [dictionary[@"absenceProportion"]floatValue]*360;
+        NSInteger leave = [dictionary[@"leaveProportion"]floatValue]*360;
+        NSInteger later = [dictionary[@"lateProportion"]floatValue]*360;
+        NSInteger appear = [dictionary[@"appearProportion"]floatValue]*360;
+        self.slices = @[[NSNumber numberWithInteger:absence],[NSNumber numberWithInteger:leave],[NSNumber numberWithInteger:later],[NSNumber numberWithInteger:appear]];
+        
+        
         NSArray *absenceArray = dictionary[@"history"][@"absence"];
         NSArray *leaveArray = dictionary[@"history"][@"leave"];
         NSArray *lateArray = dictionary[@"history"][@"late"];
         NSArray *appearArray = dictionary[@"history"][@"all"];
         self.nextViewData = @[absenceArray,leaveArray,lateArray,appearArray];
+        [self.pieChart reloadData];
     }];
-    
 }
-
-
 
 
 
@@ -191,7 +216,11 @@
 }
 
 - (void)loadNewView:(void(^)(NSDictionary  * dict))success{
-//    THLog(@"1111  %@",self.textfield.subdata);
+    
+    if ([self.textfield.subdata isEqual:@"全部"]) {
+        [self showTotalDataFromServe];
+        THLog(@"ssss");
+    }else{
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     NSDictionary *requestData = @{
                                   @"courseId" : self.courseId,
@@ -208,6 +237,7 @@
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         THLog(@"%@",error);
     }];
+    }
 
 }
 
