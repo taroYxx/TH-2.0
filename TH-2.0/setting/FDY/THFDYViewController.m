@@ -30,6 +30,7 @@
 
 
 
+
 @end
 
 @implementation THFDYViewController
@@ -46,7 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-       self.automaticallyAdjustsScrollViewInsets = NO;
+    self.automaticallyAdjustsScrollViewInsets = NO;
      
     
    
@@ -92,21 +93,32 @@
                 for (NSDictionary *studentDict in student) {
                     NSArray *records = studentDict[@"records"];
                     NSString *studentNo = studentDict[@"studentNo"];
-                    NSString *classNo = studentDict[@"classNo"];
+//                    NSString *classNo = studentDict[@"classNo"];
                     NSString *major = studentDict[@"major"];
                     NSString *name = studentDict[@"name"];
                     NSNumber *studentId= studentDict[@"studentId"];
                     
                     
                     NSMutableArray *recodeModel = [NSMutableArray array];
+                    NSInteger period = 0;
                     for (NSDictionary *recodedict in records) {
                         THRecord *recodeM = [THRecord recodeWithDic:recodedict];
+                        period = period + recodeM.period.integerValue;
+    
+//                        self.period = self.period + recodeM.period.integerValue;
                         [recodeModel addObject:recodeM];
                     }
+                    
+//                    for (THRecord *recodePeriod in recodeModel) {
+//                        NSInteger *period = 0;
+//                        period = period + recodePeriod.period.integerValue;
+//                    }
+                    
+                    
                     NSDictionary *dict1 = @{
                                             @"records" :recodeModel,
                                             @"studentNo" : studentNo,
-                                            @"classNo" : classNo,
+                                            @"period" : @(period),
                                             @"major" : major,
                                             @"name" : name,
                                             @"studentId" : studentId
@@ -241,14 +253,15 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 
 {
-
-    THStudentCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collect" forIndexPath:indexPath];
+    
+    THStudentCollectionViewCell *cell =(THStudentCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"collect" forIndexPath:indexPath];
     THMessage *student = self.studentModel[indexPath.row];
-       cell.studentName.label.text = student.name;
-       cell.classNo.label.text = student.classNo;
-       cell.studentNo.label.text = student.studentNo;
-       cell.major.label.text = student.major;
-       cell.tableViewData = student.records;
+    cell.studentName.label.text = student.name;
+    cell.classNo.label.text = [NSString stringWithFormat:@"%@课时",student.period];
+    cell.studentNo.label.text = student.studentNo;
+    cell.major.label.text = student.major;
+    cell.tableViewData = student.records;
+    
     cell.tableViewCount = student.records.count;
 
   

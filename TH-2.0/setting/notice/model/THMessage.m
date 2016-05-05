@@ -19,6 +19,7 @@
         self.records = dic[@"records"];
         self.recordString = dic[@"recordString"];
         self.state = dic[@"state"];
+        self.period = dic[@"period"];
         
         //        [self setValuesForKeysWithDictionary: dic];
     }

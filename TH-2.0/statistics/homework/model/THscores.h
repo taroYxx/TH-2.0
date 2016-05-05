@@ -9,9 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface THscores : NSObject
-@property (nonatomic , copy) NSString * name;
-@property (nonatomic , strong) NSNumber * classNo;
-@property (nonatomic , copy) NSString * major;
+@property (nonatomic , copy) NSString * studentName;
+@property (nonatomic , strong) NSNumber * studentId;
 @property (nonatomic , strong) NSNumber * studentNo;
 @property (nonatomic , strong) NSNumber * score;
 

@@ -16,6 +16,7 @@
 @property (nonatomic , strong) NSString * lessonPeriod;
 @property (nonatomic , strong) NSNumber * courseId;
 @property (nonatomic , strong) NSNumber * weekOrdinal;
+@property (nonatomic , strong) NSNumber * singleOrDouble;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
 + (instancetype)classWithDic:(NSDictionary *)dic;

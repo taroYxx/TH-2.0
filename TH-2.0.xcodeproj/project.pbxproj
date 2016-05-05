@@ -22,6 +22,8 @@
 		5012313E1C83D24900F4CC6B /* THNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5012313D1C83D24900F4CC6B /* THNextViewController.m */; };
 		501231451C83EA1A00F4CC6B /* THDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 501231411C83EA1A00F4CC6B /* THDetailViewController.m */; };
 		501231461C83EA1A00F4CC6B /* THdetailStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 501231441C83EA1A00F4CC6B /* THdetailStudent.m */; };
+		501A3CDF1CCB5BE0009D2A94 /* THHomeworkPer.m in Sources */ = {isa = PBXBuildFile; fileRef = 501A3CDE1CCB5BE0009D2A94 /* THHomeworkPer.m */; };
+		501A3CE21CCB741A009D2A94 /* THHomeworkRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 501A3CE11CCB741A009D2A94 /* THHomeworkRecord.m */; };
 		5029EAC61C94FFB700291FF9 /* THSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5029EAC51C94FFB700291FF9 /* THSettingTableViewController.m */; };
 		5029EACC1C951FA000291FF9 /* THAbsenceMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5029EACB1C951FA000291FF9 /* THAbsenceMessage.m */; };
 		503990DB1CA3CA5200D45F2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 503990DA1CA3CA5200D45F2A /* Assets.xcassets */; };
@@ -109,6 +111,10 @@
 		501231411C83EA1A00F4CC6B /* THDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THDetailViewController.m; sourceTree = "<group>"; };
 		501231431C83EA1A00F4CC6B /* THdetailStudent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THdetailStudent.h; sourceTree = "<group>"; };
 		501231441C83EA1A00F4CC6B /* THdetailStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THdetailStudent.m; sourceTree = "<group>"; };
+		501A3CDD1CCB5BE0009D2A94 /* THHomeworkPer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THHomeworkPer.h; sourceTree = "<group>"; };
+		501A3CDE1CCB5BE0009D2A94 /* THHomeworkPer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THHomeworkPer.m; sourceTree = "<group>"; };
+		501A3CE01CCB741A009D2A94 /* THHomeworkRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THHomeworkRecord.h; sourceTree = "<group>"; };
+		501A3CE11CCB741A009D2A94 /* THHomeworkRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THHomeworkRecord.m; sourceTree = "<group>"; };
 		5029EAC41C94FFB700291FF9 /* THSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSettingTableViewController.h; sourceTree = "<group>"; };
 		5029EAC51C94FFB700291FF9 /* THSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSettingTableViewController.m; sourceTree = "<group>"; };
 		5029EACA1C951FA000291FF9 /* THAbsenceMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THAbsenceMessage.h; sourceTree = "<group>"; };
@@ -397,6 +403,15 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		501A3CDC1CCB5BE0009D2A94 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				501A3CDD1CCB5BE0009D2A94 /* THHomeworkPer.h */,
+				501A3CDE1CCB5BE0009D2A94 /* THHomeworkPer.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		5029EAC31C94FFB700291FF9 /* setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -518,6 +533,8 @@
 			children = (
 				50AF8F0B1C96E67200242482 /* THscores.h */,
 				50AF8F0C1C96E67200242482 /* THscores.m */,
+				501A3CE01CCB741A009D2A94 /* THHomeworkRecord.h */,
+				501A3CE11CCB741A009D2A94 /* THHomeworkRecord.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -647,6 +664,7 @@
 		50DE4D791C7EE32900AD006C /* Static */ = {
 			isa = PBXGroup;
 			children = (
+				501A3CDC1CCB5BE0009D2A94 /* model */,
 				50035A141C868CD500FF6BF3 /* controller */,
 			);
 			path = Static;
@@ -896,6 +914,7 @@
 				503B96741CA0D5FC00DA3491 /* THNamelistViewController.m in Sources */,
 				5098C37A1C81B45400305CC9 /* THClassTableViewCell.m in Sources */,
 				50400C6F1C858FBF00372175 /* THHistoryViewController.m in Sources */,
+				501A3CDF1CCB5BE0009D2A94 /* THHomeworkPer.m in Sources */,
 				5012313A1C83D22000F4CC6B /* THOrderNameViewController.m in Sources */,
 				508E40431C92F6D500DE5D98 /* THMessage.m in Sources */,
 				50035A201C86CD1F00FF6BF3 /* THSetNoticeViewController.m in Sources */,
@@ -913,6 +932,7 @@
 				50DE4D811C7EE32900AD006C /* THSettingGroup.m in Sources */,
 				50E6F4D61CAA9F00002436E1 /* THSegmentScrollViewController.m in Sources */,
 				50E1B2991C8A861E0060C52C /* THDetailHistoryViewController.m in Sources */,
+				501A3CE21CCB741A009D2A94 /* THHomeworkRecord.m in Sources */,
 				50DE4D511C7ED19200AD006C /* THLoginViewController.m in Sources */,
 				50080CCF1CA2859100E0D324 /* THStudentCollectionViewCell.m in Sources */,
 				500FDD4C1C3F9E740069F2AE /* main.m in Sources */,

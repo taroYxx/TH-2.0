@@ -12,10 +12,9 @@
 - (instancetype)initWithDic:(NSDictionary *)dic{
     if (self = [super init]) {
     
-        self.name = dic[@"name"];
+        self.studentName = dic[@"studentName"];
         self.studentNo = dic[@"studentNo"];
-        self.classNo = dic[@"classNo"];
-        self.major = dic[@"major"];
+        self.studentId = dic[@"studentId"];
         self.score = dic[@"score"];
         
         //        [self setValuesForKeysWithDictionary: dic];

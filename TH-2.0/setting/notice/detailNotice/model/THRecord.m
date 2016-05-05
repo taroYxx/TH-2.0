@@ -21,6 +21,7 @@
         self.recordId = dic[@"recordId"];
         self.week = dic[@"week"];
         self.ctime = dic[@"ctime"];
+        self.period = dic[@"period"];
     }
     return self;
 }

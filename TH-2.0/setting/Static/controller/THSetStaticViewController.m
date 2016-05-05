@@ -14,6 +14,7 @@
 #import "THClassNameListTool.h"
 #import <MJPopupViewController/UIViewController+MJPopupViewController.h>
 #import "THPresentTableViewController.h"
+#import "THHomeworkPer.h"
 
 @interface THSetStaticViewController ()<UITextFieldDelegate,XYPieChartDataSource,XYPieChartDelegate,THPresentDelegate>
 @property (nonatomic , weak) UISlider * slider;
@@ -30,6 +31,7 @@
 @property (nonatomic , strong) NSMutableArray * nameOfSlice;
 @property (nonatomic , weak) UILabel * absenceLabel;
 @property (nonatomic , weak) UITextField * absenceTextField;
+@property (nonatomic , strong) NSArray * PerModel;
 
 
 
@@ -66,7 +68,7 @@
     kechengming.text = @"请选择课程名：";
     kechengming.font = [UIFont systemFontOfSize:14];
     [self.view addSubview:kechengming];
-    UITextField *textfield =[[UITextField alloc] initWithFrame:CGRectMake(screenW/3+15, 70, screenW-screenW/3-20, 30)];
+    UITextField *textfield =[[UITextField alloc] initWithFrame:CGRectMake(screenW/3+15, 70, screenW-screenW/3-20,40)];
     textfield.borderStyle = UITextBorderStyleRoundedRect;
     textfield.delegate = self;
 //    self.pickview = [[UIPickerView alloc] initWithFrame:CGRectMake(0,screenH-200, screenW, 200)];
@@ -124,6 +126,16 @@
     }
     self.pickViewData = mutableArray;
     self.courseId = classId;
+    
+    [self getHomeworkPerByCourseId:^(NSArray *array) {
+        NSMutableArray *mutaleArray = [NSMutableArray array];
+        for (NSDictionary *dict in array) {
+            THHomeworkPer *per = [THHomeworkPer HomeWorkPerWithDic:dict];
+            [mutaleArray addObject:per];
+        }
+        self.PerModel = mutaleArray;
+    }];
+    
 }
 
 - (UIView *)pieView :(CGRect)frame :(UIColor *)color :(NSString *)title{
@@ -152,15 +164,15 @@
     [self.pieChart setLabelFont:[UIFont fontWithName:@"DBLCDTempBlack" size:20]];
     [self.pieChart setLabelRadius:R-20];//数据标签出现的位置
     [self.pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
-    [self.pieChart setPieCenter:CGPointMake(screenW/2, screenH/3)];
+    [self.pieChart setPieCenter:CGPointMake(screenW/2, screenH/3+10)];
     [self.pieChart setLabelShadowColor:[UIColor blackColor]];
 //        [self.pieChart setShowPercentage:NO];
     self.nameOfSlice = [NSMutableArray arrayWithObjects:@"考勤",@"平时作业",nil];
     self.colorOfSlice =[NSMutableArray arrayWithObjects:
                         YColor(209, 84, 87, 1),YColor(228, 228, 228, 1),
                         nil];
-    [self.view addSubview:[self pieView:CGRectMake(screenW/4, screenH/2, screenW/4, screenW/12) :YColor(208, 86, 90, 1) :@"课堂考勤"]];
-    [self.view addSubview:[self pieView:CGRectMake(screenW/2, screenH/2, screenW/4, screenW/12) :YColor(228, 228, 228, 1) :@"平时作业"]];
+    [self.view addSubview:[self pieView:CGRectMake(screenW/4, screenH/2+5, screenW/4, screenW/12) :YColor(208, 86, 90, 1) :@"课堂考勤"]];
+    [self.view addSubview:[self pieView:CGRectMake(screenW/2, screenH/2+5, screenW/4, screenW/12) :YColor(228, 228, 228, 1) :@"平时作业"]];
  
     [self.view addSubview:self.pieChart];
 
@@ -202,7 +214,7 @@
         if (status.intValue == 1) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"提交成功！" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                
             }];
             [alert addAction:confirm];
             [self presentViewController:alert animated:YES completion:nil];
@@ -285,6 +297,23 @@
     THLog(@"%@",self.courseId);
     self.textfield.text = dict[@"courseName"];
      THLog(@"%@",self.textfield);
+    
+    
+    for (THHomeworkPer *per in self.PerModel) {
+        if (per.courseId == self.subcourseId) {
+      
+            self.slider.value = 1-[per.homeworkper floatValue];
+            THLog(@"%f",self.slider.value);
+            self.absenceTextField.text = [NSString stringWithFormat:@"%@",per.deduct_points];
+            float kaoqin = (1-[per.homeworkper floatValue]) * 360;
+            float zuoye = [per.homeworkper floatValue] * 360;
+            self.slices = @[[NSNumber numberWithFloat:kaoqin],[NSNumber numberWithFloat:zuoye
+                                                               ]];
+            [self.pieChart reloadData];
+        }
+    }
+    
+    
     [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
 }
 
@@ -309,6 +338,24 @@
         //        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"name"];
         //        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"teacherNo"];
         //        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"groupName"];
+    }];
+    
+}
+
+- (void)getHomeworkPerByCourseId:(void(^)( NSArray *array))success{
+    NSString *url = [NSString stringWithFormat:@"%@/%@/getHomeworkPerByCourseId/",host,version];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSArray *result = responseObject[@"course"];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            if (success) {
+                success(result);
+            }
+        }];
+        
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        THLog(@"%@",error);
     }];
     
 }

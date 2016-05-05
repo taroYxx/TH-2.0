@@ -108,7 +108,21 @@
        
     }
     THClass *classdetail = self.tableviewData[indexPath.row];
-    cell.textLabel.text = classdetail.courseName;
+
+    switch (classdetail.singleOrDouble.integerValue) {
+        case 0:
+            cell.textLabel.text = classdetail.courseName;
+            break;
+        case 1:
+            cell.textLabel.text = [NSString stringWithFormat:@"%@(单周)",classdetail.courseName];
+            break;
+        case 2:
+            cell.textLabel.text = [NSString stringWithFormat:@"%@(双周)",classdetail.courseName];
+            break;
+        default:
+            break;
+    }
+    
     NSArray *allweek = @[@"周一",@"周二",@"周三",@"周四",@"周五",@"周六",@"周日"];
 
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@%@",[allweek objectAtIndex:classdetail.week.intValue],classdetail.lessonPeriod];

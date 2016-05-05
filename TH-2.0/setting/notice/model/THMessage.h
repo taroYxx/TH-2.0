@@ -17,6 +17,7 @@
 @property (nonatomic , strong) NSArray * records;
 @property (nonatomic , strong) NSString * recordString;
 @property (nonatomic , strong) NSNumber * state;
+@property (nonatomic , strong) NSNumber * period;
 
 
 - (instancetype)initWithDic:(NSDictionary *)dic;

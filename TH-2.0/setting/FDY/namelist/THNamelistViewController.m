@@ -48,6 +48,7 @@
     
     cell.textLabel.text = student.name;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld次",student.records.count];
+    
     return cell;
 }
 

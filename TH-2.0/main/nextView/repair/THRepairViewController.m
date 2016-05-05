@@ -122,9 +122,10 @@
         }
     }
 //   mutableArray = @[absence,leave,late];
-    mutableArray = [absence arrayByAddingObjectsFromArray:absence];
+    mutableArray = absence;
     mutableArray = [mutableArray arrayByAddingObjectsFromArray:leave];
     mutableArray = [mutableArray arrayByAddingObjectsFromArray:late];
+    
 //    NSMutableArray *result = [NSMutableArray array];
 //    for (NSArray *subarray in mutableArray) {
 //        for (THStudent *perST in subarray) {
@@ -242,6 +243,8 @@
     NSString *url = [NSString stringWithFormat:@"%@/%@/special_offer/",host,version];
     [manager POST:url parameters:requestData success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSMutableArray *array = responseObject[@"class"];
+//        THLog(@"%@",array);
+        
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             if (success) {
                 success(array);
@@ -265,9 +268,11 @@
     NSDictionary *dict = @{
                            @"courseId" : self.courseId,
                            @"weekOrdinal" : self.weekOrdinal,
-                           @"studentIdForMiss" :mutarray[0],
+                           @"studentIdForMiss" :mutarray[3],
                            @"studentIdForLeave" :mutarray[1],
-                           @"studentIdForLate" :mutarray[2]
+                           @"studentIdForLate" :mutarray[2],
+                           @"studentIdForArrive" : mutarray[0]
+                           
                            };
     THLog(@"%@",dict);
     NSString *url = [NSString stringWithFormat:@"%@/%@/record_again/",host,version];

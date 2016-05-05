@@ -17,5 +17,6 @@
 @property (nonatomic , strong) NSString * ctime;
 @property (nonatomic , strong) NSNumber * week;
 @property (nonatomic , strong) NSString * recordId;
+@property (nonatomic , strong) NSNumber * period;
 + (instancetype)recodeWithDic:(NSDictionary *)dic;
 @end

@@ -20,6 +20,7 @@
         self.courseId = dic[@"courseId"];
         self.weekOrdinal = dic[@"weekOrdinal"];
         self.week = dic[@"week"];
+        self.singleOrDouble = dic[@"singleOrDouble"];
 //        [self setValuesForKeysWithDictionary: dic];
     }
     return self;

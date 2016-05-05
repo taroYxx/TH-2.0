@@ -108,7 +108,6 @@
 
 - (void)showTotalDataFromServe{
     [self totalDataFromServe:^(NSDictionary *dictionary) {
-        THLog(@"%@",dictionary);
         NSInteger absence = [dictionary[@"absenceProportion"]floatValue]*360;
         NSInteger leave = [dictionary[@"leaveProportion"]floatValue]*360;
         NSInteger later = [dictionary[@"lateProportion"]floatValue]*360;
