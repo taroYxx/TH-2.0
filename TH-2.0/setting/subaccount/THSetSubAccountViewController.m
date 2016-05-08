@@ -48,6 +48,7 @@
     
     UITextField *username = [[UITextField alloc] initWithFrame:CGRectMake(5, 60+80, screenW-10, 40)];
     self.username = username;
+    self.username.placeholder = @"请输入6-15位数字或字母";
     UITextField *password = [[UITextField alloc] initWithFrame:CGRectMake(5, 60+74*2, screenW-10, 40)];
     self.password = password;
 
@@ -118,7 +119,7 @@
                                @"remarks" : self.remarks.text
                                };
     
-    if (self.username.text.length < 15 && self.username.text.length > 6 ) {
+    if (self.username.text.length <= 15 && self.username.text.length >= 6 ) {
         [manager POST:url1 parameters:@{@"username" : self.username.text} success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             THLog(@"%@",responseObject);
             NSNumber *status = responseObject[@"status"];
@@ -160,6 +161,9 @@
     }
     
     
+    
+    
+    
     }
 
 - (void)getAssistantInfo:(void(^)( NSDictionary *dict))success{
@@ -190,6 +194,12 @@
         manger.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
         [manger POST:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             THLog(@"%@",responseObject);
+            [self getAssistantInfo:^(NSDictionary *dict) {
+                self.remarks.text = dict[@"remarks"];
+                self.username.text = dict[@"username"];
+                self.password.text = dict[@"password"];
+            }];
+        
         } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
             THLog(@"%@",error);
         }];
